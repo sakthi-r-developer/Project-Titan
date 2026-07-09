@@ -1,26 +1,21 @@
-# 🚀 Project Titan
+# Project Titan
 
-My journey to becoming a Java Full Stack Developer.
+A 9-month roadmap to become a Full Stack Software Engineer capable of cracking top product company internships and placements.
 
-## Repository Structure
-
-```
-01-Java/
-02-DSA/
-03-SQL/
-04-Git/
-05-SpringBoot/
-06-Frontend/
-07-Projects/
-08-SystemDesign/
-09-Resume/
-10-Notes/
-```
+## Current Phase
+Sprint 0 - Environment Setup
 
 ## Goals
-
 - Master Java
 - Master DSA
+- Build production-ready projects
 - Learn Spring Boot
-- Build Full Stack Projects
-- Crack Product-Based Companies
+- Learn React
+- Learn System Design
+- Become interview-ready
+
+## Progress
+
+- [x] Repository Created
+- [ ] Sprint 0 Completed
+- [ ] Sprint 1 Started
