@@ -10,6 +10,15 @@ public class Student {
         this.department = department;
     }
     public String toString(){
-        return "Student [id=" + id + ", name=" + name + ", age=" + age + ", department=" + department + "]" ;
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID : "+id+"\n");
+        sb.append("Name : "+name+"\n");
+        sb.append("Age : "+age+"\n");
+        sb.append("Department : "+department+"\n");
+        return sb.toString();
     }
+    public int getId() {
+        return id;
+    }
+
 }
