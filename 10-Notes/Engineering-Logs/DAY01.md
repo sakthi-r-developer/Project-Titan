@@ -11,6 +11,7 @@
 - Installed IntelliJ
 - Created Project Titan repository
 - Solved 2 LeetCode problems
+- Created basic version of SMS(add,view,exit)
 
 ## 📚 Learned
 - Git basics
