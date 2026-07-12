@@ -6,31 +6,10 @@
     class Main {
         //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
         // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-        private static void addStudent(ArrayList<Student> students, Student student) {
-            students.add(student);
-        }
-        private static void viewStudents(ArrayList<Student> students) {
-            for (Student student : students) {
-                System.out.println(student);
-            }
-        }
-        private static Student searchStudent(ArrayList<Student> students, int searchId) {
-
-            for (Student student: students) {
-                if(student.getId() == searchId) {
-                    return student;
-                }
-            }
-            return null;
-
-        }
-
-        private static void deleteStudent(ArrayList<Student> students, Student student) {
-            students.remove(student);
-        }
 
         public static void main(String[] args) {
-            ArrayList<Student> students = new ArrayList<>();
+//            ArrayList<Student> students = new ArrayList<>();
+            StudentService studentService = new StudentService();
             Scanner sc = new Scanner(System.in);
             while (true) {
                 System.out.println("1. Add Student \n"+
@@ -51,7 +30,7 @@
                         int id = sc.nextInt();
                         sc.nextLine();
 
-                        Student existingStudent = searchStudent(students, id);
+                        Student existingStudent=studentService.searchStudent(id);
                         if(existingStudent != null) {
                             System.out.println("Student id already in use");
                             break;
@@ -69,22 +48,22 @@
                                 "Enter Student Department: "
                         );
                         String department = sc.nextLine();
-                        addStudent(students,new Student(id,name,age,department));
+                        studentService.addStudent(new Student(id,name,age,department));
                         break;
                     case 2:
-                        if(students.isEmpty()) {
+                        if(studentService.isStudentsEmpty()) {
                             System.out.println("no students found");
 
                         }
                         else {
-                            viewStudents(students);
+                            studentService.viewStudents();
                         }
                         break;
                     case 3:
                         System.out.println("Enter Student ID: ");
                         int searchId = sc.nextInt();
                         sc.nextLine();
-                        Student foundStudent=searchStudent(students, searchId);
+                        Student foundStudent=studentService.searchStudent( searchId);
                         if(foundStudent!=null) {
                             System.out.println(foundStudent);
                         }
@@ -97,9 +76,9 @@
                         int deleteId = sc.nextInt();
                         sc.nextLine();
 
-                        Student studentToDelete=searchStudent(students, deleteId);
+                        Student studentToDelete = studentService.searchStudent(deleteId);
                         if(studentToDelete!=null) {
-                            deleteStudent(students, studentToDelete);
+                            studentService.deleteStudent(studentToDelete);
                             System.out.println("Student deleted successfully.");
                         }
                         else{

@@ -1,20 +1,22 @@
 # Student Management System
 
-A simple console-based Student Management System built in Java as part of **Project Titan**.
+A console-based Student Management System built in Java as part of **Project Titan** to strengthen Object-Oriented Programming, clean code, and software engineering fundamentals.
 
 ## Features
 
-* Add Student
-* View All Students
-* Search Student by ID
-* Delete Student
-* Prevent Duplicate Student IDs
+* ✅ Add Student
+* ✅ View Students
+* ✅ Search Student by ID
+* ✅ Delete Student
+* ✅ Prevent Duplicate Student IDs
+* ✅ Modular methods
+* ✅ Business logic separated using `StudentService`
 
 ## Technologies Used
 
 * Java
-* ArrayList
 * Object-Oriented Programming (OOP)
+* ArrayList
 * IntelliJ IDEA
 * Git & GitHub
 
@@ -24,41 +26,56 @@ A simple console-based Student Management System built in Java as part of **Proj
 sms/
 ├── src/
 │   ├── Main.java
-│   └── Student.java
+│   ├── Student.java
+│   └── StudentService.java
 └── README.md
 ```
 
-## How to Run
+## Architecture
 
-1. Clone the repository.
-2. Open the project in IntelliJ IDEA (or any Java IDE).
-3. Compile and run `Main.java`.
-4. Use the menu to manage student records.
+**Main.java**
+
+* Handles user interaction
+* Reads user input
+* Displays menu
+* Delegates operations to `StudentService`
+
+**StudentService.java**
+
+* Manages the student list
+* Contains all business logic
+* Performs add, search, view, and delete operations
+
+**Student.java**
+
+* Represents a student object
+* Stores student details
 
 ## Learning Outcomes
 
-This project helped me practice:
+During this project, I learned:
 
-* Creating and using classes and objects
-* Working with `ArrayList`
+* Object-Oriented Programming fundamentals
 * Method extraction and code reuse
-* Searching objects in a collection
-* Preventing duplicate records
-* Refactoring to reduce code duplication
-* Writing cleaner and more maintainable Java code
+* Encapsulation
+* Separation of responsibilities
+* Constructors
+* Difference between static and instance methods
+* Returning objects from methods
+* Clean code organization
 
 ## Future Improvements
 
 * Update Student
 * Input validation
 * Exception handling
-* File-based data storage
-* Database integration (MySQL)
-* Layered architecture (`Service`, `Repository`)
+* File storage
+* MySQL integration
+* Layered architecture
 * Spring Boot REST API
 
 ## Author
 
 **Sakthi R**
 
-Part of **Project Titan** — a project-based journey to become an industry-ready Software Engineer.
+Part of **Project Titan** — a long-term journey to become an industry-ready Software Engineer through project-based learning.
