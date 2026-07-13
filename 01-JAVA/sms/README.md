@@ -4,13 +4,26 @@ A console-based Student Management System built in Java as part of **Project Tit
 
 ## Features
 
-* ✅ Add Student
-* ✅ View Students
-* ✅ Search Student by ID
-* ✅ Delete Student
-* ✅ Prevent Duplicate Student IDs
-* ✅ Modular methods
-* ✅ Business logic separated using `StudentService`
+- Add Student
+- View All Students
+- Search Student by ID
+- Delete Student by ID
+- Duplicate ID Detection
+- Student Data Validation
+- User-friendly Validation Messages
+- Object-Oriented Design using Classes and Services
+
+## Validation Rules
+
+The application validates student details before adding a new student.
+
+- Student ID must be greater than 0.
+- Student Name cannot be empty.
+- Student Department cannot be empty.
+- Student Age must be between 16 and 100.
+- Duplicate Student IDs are not allowed.
+
+If validation fails, the application displays a specific error message instead of adding the student.
 
 ## Technologies Used
 

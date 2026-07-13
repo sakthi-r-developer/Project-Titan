@@ -5,7 +5,36 @@ public class StudentService{
     public StudentService(){
         students = new ArrayList<>();
     }
-
+    public boolean isValidStudent(Student student){
+        if(student.getId()<=0) {
+            return false;
+        }
+        else if(student.getName().trim().isEmpty()) {
+            return false;
+        }
+        else if(student.getDepartment().trim().isEmpty()) {
+            return false;
+        }
+        else if(student.getAge()<16 || student.getAge()>100) {
+            return false;
+        }
+        else return true;
+    }
+    public String inValidDetail(Student student){
+        if(student.getId()<=0) {
+            return "Invalid ID";
+        }
+        else if(student.getName().trim().isEmpty()) {
+            return "Invalid Name";
+        }
+        else if(student.getDepartment().trim().isEmpty()) {
+            return "Invalid Department";
+        }
+        else if(student.getAge()<16 || student.getAge()>100) {
+            return "Invalid Age";
+        }
+        else return "Unknown validation error";
+    }
     public void addStudent(Student student){
         students.add(student);
     }

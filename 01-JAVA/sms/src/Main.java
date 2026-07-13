@@ -30,6 +30,7 @@
                         int id = sc.nextInt();
                         sc.nextLine();
 
+
                         Student existingStudent=studentService.searchStudent(id);
                         if(existingStudent != null) {
                             System.out.println("Student id already in use");
@@ -48,11 +49,18 @@
                                 "Enter Student Department: "
                         );
                         String department = sc.nextLine();
-                        studentService.addStudent(new Student(id,name,age,department));
+                        Student student = new Student(id, name, age, department);
+
+                        if(studentService.isValidStudent(student)){
+                            studentService.addStudent(student);
+                        }
+                        else{
+                            System.out.println(studentService.inValidDetail(student)+"\n");
+                        }
                         break;
                     case 2:
                         if(studentService.isStudentsEmpty()) {
-                            System.out.println("no students found");
+                                System.out.println("no students found");
 
                         }
                         else {
