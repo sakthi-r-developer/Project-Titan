@@ -58,6 +58,35 @@ public class StudentService{
         students.remove(student);
     }
 
+//    public void updateStudent(Student studentToUpdate,String modifyField) {
+//        switch (modifyField) {
+//            case "Name":
+//                System.out.println("Enter update Student Name: ");
+//                String updateName = sc.nextLine();
+//                sc.nextLine();
+//                if(studentToUpdate.getName().equals(updateName)){
+//                    studentToUpdate.setName(updateName);
+//                }
+//                break;
+//            case "Age":
+//                System.out.println("Enter update Student Age: ");
+//                int updateAge = sc.nextInt();
+//                sc.nextLine();
+//                studentToUpdate.setAge(updateAge);
+//                break;
+//            case "Department":
+//                System.out.println("Enter update Student Department: ");
+//                String updateDepartment = sc.nextLine();
+//                sc.nextLine();
+//                studentToUpdate.setDepartment(updateDepartment);
+//                break;
+//            default:
+//                System.out.println("Invalid input");
+//                break;
+//        }
+//
+//    }
+
     public boolean isStudentsEmpty() {
         return students.isEmpty();
     }
