@@ -1,94 +1,91 @@
-# Student Management System
+# 🚀 Project Titan
 
-A console-based Student Management System built in Java as part of **Project Titan** to strengthen Object-Oriented Programming, clean code, and software engineering fundamentals.
+Project Titan is my project-driven learning journey to become internship and placement ready.
 
-## Features
+Instead of only watching tutorials, I'm building real projects while improving my software engineering skills one day at a time.
+
+---
+
+## Current Project
+
+### Student Management System (Java)
+
+A console-based application built using Core Java to practice object-oriented programming and clean code principles.
+
+### Features
 
 - Add Student
-- View All Students
-- Search Student by ID
-- Delete Student by ID
-- Duplicate ID Detection
-- Student Data Validation
-- User-friendly Validation Messages
-- Object-Oriented Design using Classes and Services
+- View Students
+- Search Student
+- Update Student
+- Delete Student
+- Duplicate ID Validation
+- Input Validation
+- Service Layer Architecture
 
-## Validation Rules
+---
 
-The application validates student details before adding a new student.
+## Tech Stack
 
-- Student ID must be greater than 0.
-- Student Name cannot be empty.
-- Student Department cannot be empty.
-- Student Age must be between 16 and 100.
-- Duplicate Student IDs are not allowed.
+- Java
+- IntelliJ IDEA
+- Git
+- GitHub
 
-If validation fails, the application displays a specific error message instead of adding the student.
+---
 
-## Technologies Used
+## Concepts Learned
 
-* Java
-* Object-Oriented Programming (OOP)
-* ArrayList
-* IntelliJ IDEA
-* Git & GitHub
+- Classes & Objects
+- Constructors
+- Encapsulation
+- Getters & Setters
+- Object Composition
+- Service Layer
+- Method Extraction
+- Clean Code
+- Input Validation
+- CRUD Operations
+- Refactoring
+- Separation of Concerns
+
+---
 
 ## Project Structure
 
-```text
+```
 sms/
-├── src/
-│   ├── Main.java
-│   ├── Student.java
-│   └── StudentService.java
-└── README.md
+├── Main.java
+├── Student.java
+└── StudentService.java
 ```
 
-## Architecture
+---
 
-**Main.java**
+## Engineering Log
 
-* Handles user interaction
-* Reads user input
-* Displays menu
-* Delegates operations to `StudentService`
+- ✅ Day 1 – Add Student
+- ✅ Day 2 – Search Student
+- ✅ Day 3 – Refactoring with Methods
+- ✅ Day 4 – StudentService Architecture
+- ✅ Day 5 – Validation & Encapsulation
+- ✅ Day 6 – Update Student Feature
+- ✅ Day 7 – Business Logic Refactoring
 
-**StudentService.java**
+---
 
-* Manages the student list
-* Contains all business logic
-* Performs add, search, view, and delete operations
+## Next Goals
 
-**Student.java**
+- Sort Students
+- Save Data to File
+- Load Data from File
+- Exception Handling
+- Collections Framework Improvements
+- Database Integration (JDBC)
+- Unit Testing
 
-* Represents a student object
-* Stores student details
+---
 
-## Learning Outcomes
+## Learning Goal
 
-During this project, I learned:
-
-* Object-Oriented Programming fundamentals
-* Method extraction and code reuse
-* Encapsulation
-* Separation of responsibilities
-* Constructors
-* Difference between static and instance methods
-* Returning objects from methods
-* Clean code organization
-
-## Future Improvements
-
-* Update Student
-* Input validation
-* Exception handling
-* File storage
-* MySQL integration
-* Layered architecture
-* Spring Boot REST API
-
-## Author
-
-**Sakthi R**
-
-Part of **Project Titan** — a long-term journey to become an industry-ready Software Engineer through project-based learning.
+Build projects that demonstrate problem-solving, clean architecture, and software engineering fundamentals while preparing for internships and placements.

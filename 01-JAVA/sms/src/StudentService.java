@@ -6,23 +6,17 @@ public class StudentService{
         students = new ArrayList<>();
     }
     public boolean isValidStudent(Student student){
-        if(student.getId()<=0) {
-            return false;
-        }
-        else if(student.getName().trim().isEmpty()) {
-            return false;
-        }
-        else if(student.getDepartment().trim().isEmpty()) {
-            return false;
-        }
-        else if(student.getAge()<16 || student.getAge()>100) {
+        if(student.getId()<=0 || searchStudent(student.getId())!=null || student.getName().trim().isEmpty() || student.getDepartment().trim().isEmpty() || student.getAge()<16 || student.getAge()>100) {
             return false;
         }
         else return true;
     }
     public String inValidDetail(Student student){
-        if(student.getId()<=0) {
+        if(student.getId()<=0 ) {
             return "Invalid ID";
+        }
+        else if(searchStudent(student.getId())!=null) {
+            return "Student with ID "+student.getId()+" already exists";
         }
         else if(student.getName().trim().isEmpty()) {
             return "Invalid Name";
@@ -33,10 +27,18 @@ public class StudentService{
         else if(student.getAge()<16 || student.getAge()>100) {
             return "Invalid Age";
         }
+//        else if(student.searchStudent())
         else return "Unknown validation error";
     }
-    public void addStudent(Student student){
-        students.add(student);
+    public boolean addStudent(Student student){
+        if(isValidStudent(student)) {
+            students.add(student);
+            return true;
+        }
+        else{
+            System.out.println(inValidDetail(student));
+            return false;
+        }
     }
     public void viewStudents() {
         for (Student student : students) {
@@ -54,38 +56,45 @@ public class StudentService{
         return null;
 
     }
-    public void deleteStudent( Student student) {
-        students.remove(student);
+    public boolean deleteStudent( int deleteId) {
+        Student student = searchStudent(deleteId);
+        if(student!=null) {
+            students.remove(student);
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
-//    public void updateStudent(Student studentToUpdate,String modifyField) {
-//        switch (modifyField) {
-//            case "Name":
-//                System.out.println("Enter update Student Name: ");
-//                String updateName = sc.nextLine();
-//                sc.nextLine();
-//                if(studentToUpdate.getName().equals(updateName)){
-//                    studentToUpdate.setName(updateName);
-//                }
-//                break;
-//            case "Age":
-//                System.out.println("Enter update Student Age: ");
-//                int updateAge = sc.nextInt();
-//                sc.nextLine();
-//                studentToUpdate.setAge(updateAge);
-//                break;
-//            case "Department":
-//                System.out.println("Enter update Student Department: ");
-//                String updateDepartment = sc.nextLine();
-//                sc.nextLine();
-//                studentToUpdate.setDepartment(updateDepartment);
-//                break;
-//            default:
-//                System.out.println("Invalid input");
-//                break;
-//        }
-//
-//    }
+    public boolean updateStudent(int updateId,int choice,String value) {
+        Student studentToUpdate = searchStudent(updateId);
+        if(studentToUpdate==null) {
+            return false;
+        }
+        boolean result = false;
+        switch (choice) {
+            case 1:
+                studentToUpdate.setName(value);
+                result = true;
+                break;
+            case 2:
+                studentToUpdate.setAge(Integer.parseInt(value));
+                result = true;
+                break;
+            case 3:
+                studentToUpdate.setDepartment(value);
+                result = true;
+                break;
+            default:
+                System.out.println("Invalid input");
+                result = false;
+                break;
+        }
+        return result;
+
+    }
 
     public boolean isStudentsEmpty() {
         return students.isEmpty();

@@ -32,11 +32,11 @@
                         sc.nextLine();
 
 
-                        Student existingStudent=studentService.searchStudent(id);
-                        if(existingStudent != null) {
-                            System.out.println("Student id already in use");
-                            break;
-                        }
+//                        Student existingStudent=studentService.searchStudent(id);
+//                        if(existingStudent != null) {
+//                            System.out.println("Student id already in use");
+//                            break;
+//                        }
                         System.out.println(
                                 "Enter Student Name: "
                         );
@@ -52,12 +52,14 @@
                         String department = sc.nextLine();
                         Student student = new Student(id, name, age, department);
 
-                        if(studentService.isValidStudent(student)){
-                            studentService.addStudent(student);
+
+                        if(studentService.addStudent(student)){
+                            System.out.println("Student added successfully");
                         }
                         else{
-                            System.out.println(studentService.inValidDetail(student)+"\n");
+                            System.out.println("Student not added successfully");
                         }
+
                         break;
                     case 2:
                         if(studentService.isStudentsEmpty()) {
@@ -66,6 +68,7 @@
                         }
                         else {
                             studentService.viewStudents();
+                            System.out.println("Student view successfully");
                         }
                         break;
                     case 3:
@@ -75,6 +78,7 @@
                         Student foundStudent=studentService.searchStudent( searchId);
                         if(foundStudent!=null) {
                             System.out.println(foundStudent);
+                            System.out.println("Student found successfully");
                         }
                         else{
                             System.out.println("Student not found");
@@ -84,63 +88,42 @@
                         System.out.println("Enter Student ID: ");
                         int deleteId = sc.nextInt();
                         sc.nextLine();
-
-                        Student studentToDelete = studentService.searchStudent(deleteId);
-                        if(studentToDelete!=null) {
-                            studentService.deleteStudent(studentToDelete);
-                            System.out.println("Student deleted successfully.");
+                        if(studentService.deleteStudent(deleteId)){
+                            System.out.println("Student deleted successfully");
                         }
                         else{
-                            System.out.println("Student not found");
+                            System.out.println("Student not deleted successfully");
                         }
                         break;
                     case 5:
                         System.out.println("Enter Student ID: ");
                         int updateId = sc.nextInt();
                         sc.nextLine();
-                        Student studentToUpdate = studentService.searchStudent(updateId);
-                        if(studentToUpdate!=null) {
-                            System.out.println(studentToUpdate);
+
+//                        Student studentToUpdate = studentService.searchStudent(updateId);
+//                        if(studentToUpdate!=null) {
+//                            System.out.println(studentToUpdate);
+//                            System.out.println("Student found successfully");
+//                        }
+//                        else{
+//                            System.out.println("Student not found");
+//                            break;
+//                        }
+
+                        System.out.println("Choose Field: \n"+
+                                "1.Name\n"+
+                                "2.Age\n"+
+                                "3.Department\n"+
+                                "Enter Choice: ");
+                        int  choice = sc.nextInt();
+                        sc.nextLine();
+                        String value = sc.nextLine();
+                        if(studentService.updateStudent(updateId,choice,value)){
+                            System.out.println("Student updated successfully");
                         }
                         else{
-                            System.out.println("Student not found");
-                            break;
+                            System.out.println("Student not updated successfully");
                         }
-                        System.out.println("Enter Student Field: ");
-                        String modifyField = sc.nextLine();
-
-//                        if(studentToUpdate!=null)
-//                        StudentService.updateStudent(studentToUpadate,modifyField);
-                        switch (modifyField) {
-                            case "Name":
-                                System.out.println("Enter update Student Name: ");
-                                String updateName = sc.nextLine();
-//                                if(studentToUpdate.getName().equals(updateName)){
-                                studentToUpdate.setName(updateName);
-                                System.out.println("Student Name Updated successfully. ");
-
-//                                }
-
-                                break;
-                            case "Age":
-                                System.out.println("Enter update Student Age: ");
-                                int updateAge = sc.nextInt();
-                                sc.nextLine();
-                                studentToUpdate.setAge(updateAge);
-                                System.out.println("Student Age Updated successfully. ");
-
-                                break;
-                            case "Department":
-                                System.out.println("Enter update Student Department: ");
-                                String updateDepartment = sc.nextLine();
-                                studentToUpdate.setDepartment(updateDepartment);
-                                System.out.println("Student Department Updated successfully. ");
-                                break;
-                            default:
-                                System.out.println("Invalid input");
-                                break;
-                        }
-
                         break;
                     default:
                         break;
