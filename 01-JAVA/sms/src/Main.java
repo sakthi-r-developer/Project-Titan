@@ -17,10 +17,11 @@
                 "3. Search Student \n"+
                 "4. Delete Student \n"+
                 "5. Update Student \n"+
-                "6. Exit \n"+
+                "6. Sort Students by ID \n"+
+                "7. Exit \n"+
                 "Choose an option: ");
                 int option = sc.nextInt();
-                if(option==6) {
+                if(option==7) {
                     break;
                 }
                 switch (option) {
@@ -117,12 +118,23 @@
                                 "Enter Choice: ");
                         int  choice = sc.nextInt();
                         sc.nextLine();
+                        System.out.println("Enter Value: ");
                         String value = sc.nextLine();
                         if(studentService.updateStudent(updateId,choice,value)){
                             System.out.println("Student updated successfully");
                         }
                         else{
                             System.out.println("Student not updated successfully");
+                        }
+                        break;
+                    case 6:
+                        if(studentService.isStudentsEmpty()) {
+                            System.out.println("no students found");
+
+                        }
+                        else {
+                            studentService.sortStudentsById();
+                            System.out.println("Student sorted successfully");
                         }
                         break;
                     default:

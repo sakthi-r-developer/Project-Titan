@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class StudentService{
     private ArrayList<Student> students;
@@ -94,6 +96,11 @@ public class StudentService{
         }
         return result;
 
+    }
+
+    public void sortStudentsById() {
+        students.sort(Comparator.comparing(Student::getId));
+        viewStudents();
     }
 
     public boolean isStudentsEmpty() {

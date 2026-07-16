@@ -1,31 +1,32 @@
 # 🚀 Project Titan
 
-Project Titan is my project-driven learning journey to become internship and placement ready.
-
-Instead of only watching tutorials, I'm building real projects while improving my software engineering skills one day at a time.
+Project Titan is my project-driven learning journey to become internship and placement ready through building real software projects instead of only watching tutorials.
 
 ---
 
-## Current Project
+# 📌 Current Project
 
-### Student Management System (Java)
+## Student Management System (Java)
 
-A console-based application built using Core Java to practice object-oriented programming and clean code principles.
-
-### Features
-
-- Add Student
-- View Students
-- Search Student
-- Update Student
-- Delete Student
-- Duplicate ID Validation
-- Input Validation
-- Service Layer Architecture
+A console-based Student Management System built using Core Java while learning software engineering principles, clean code, and object-oriented programming.
 
 ---
 
-## Tech Stack
+# ✨ Features
+
+- ✅ Add Student
+- ✅ View Students
+- ✅ Search Student
+- ✅ Update Student
+- ✅ Delete Student
+- ✅ Sort Students by ID
+- ✅ Duplicate ID Validation
+- ✅ Input Validation
+- ✅ Clean Service Layer Architecture
+
+---
+
+# 🛠️ Tech Stack
 
 - Java
 - IntelliJ IDEA
@@ -34,27 +35,38 @@ A console-based application built using Core Java to practice object-oriented pr
 
 ---
 
-## Concepts Learned
+# 📚 Concepts Learned
+
+### Java
 
 - Classes & Objects
 - Constructors
 - Encapsulation
 - Getters & Setters
-- Object Composition
-- Service Layer
+- Object References
+- ArrayList
 - Method Extraction
-- Clean Code
-- Input Validation
+- Method References
+- Comparator
 - CRUD Operations
+
+### Software Engineering
+
+- Clean Code
 - Refactoring
+- Service Layer
 - Separation of Concerns
+- Validation
+- Reusability
+- Single Responsibility Principle (basic)
 
 ---
 
-## Project Structure
+# 📂 Project Structure
 
 ```
 sms/
+│
 ├── Main.java
 ├── Student.java
 └── StudentService.java
@@ -62,30 +74,35 @@ sms/
 
 ---
 
-## Engineering Log
+# 📈 Engineering Log
 
-- ✅ Day 1 – Add Student
-- ✅ Day 2 – Search Student
-- ✅ Day 3 – Refactoring with Methods
-- ✅ Day 4 – StudentService Architecture
-- ✅ Day 5 – Validation & Encapsulation
-- ✅ Day 6 – Update Student Feature
-- ✅ Day 7 – Business Logic Refactoring
+- ✅ Day 1 — Add Student
+- ✅ Day 2 — Search Student
+- ✅ Day 3 — Method Refactoring
+- ✅ Day 4 — StudentService Architecture
+- ✅ Day 5 — Encapsulation & Validation
+- ✅ Day 6 — Update Student Feature
+- ✅ Day 7 — Business Logic Refactoring
+- ✅ Day 8 — Student Sorting
 
 ---
 
-## Next Goals
+# 🎯 Upcoming Features
 
-- Sort Students
-- Save Data to File
-- Load Data from File
+- 🔄 Manual Bubble Sort
 - Exception Handling
-- Collections Framework Improvements
-- Database Integration (JDBC)
+- File Storage
+- Load Data from File
+- Collections Improvements
+- JDBC Integration
 - Unit Testing
+- Logging
+- Maven Project Structure
 
 ---
 
-## Learning Goal
+# 🧠 Learning Goal
 
-Build projects that demonstrate problem-solving, clean architecture, and software engineering fundamentals while preparing for internships and placements.
+This repository documents my journey of learning software engineering through building projects from scratch, improving them every day, and applying clean architecture and object-oriented programming principles.
+
+The goal is to become internship and placement ready by writing maintainable, readable, and scalable Java code.
