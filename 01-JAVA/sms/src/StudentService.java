@@ -97,7 +97,30 @@ public class StudentService{
         return result;
 
     }
+    public void bubbleSortStudents() {
+        int n = students.size();
+        Student temp;
+        for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
 
+            for (int j = 0; j < n - 1 - i; j++) {
+                if ((students.get(j)).getId() > (students.get(j + 1)).getId()) {
+
+                    // Swap
+                    temp = students.get(j);
+                    students.set(j, students.get(j + 1));
+                    students.set(j + 1, temp);
+
+                    swapped = true;
+                }
+            }
+
+            // Already sorted
+            if (!swapped) break;
+        }
+        viewStudents();
+
+    }
     public void sortStudentsById() {
         students.sort(Comparator.comparing(Student::getId));
         viewStudents();

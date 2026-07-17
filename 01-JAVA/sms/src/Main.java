@@ -133,7 +133,8 @@
 
                         }
                         else {
-                            studentService.sortStudentsById();
+//                            studentService.sortStudentsById();
+                            studentService.bubbleSortStudents();
                             System.out.println("Student sorted successfully");
                         }
                         break;
