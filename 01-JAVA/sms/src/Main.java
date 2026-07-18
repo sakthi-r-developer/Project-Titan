@@ -18,7 +18,9 @@
                 "4. Delete Student \n"+
                 "5. Update Student \n"+
                 "6. Sort Students by ID \n"+
-                "7. Exit \n"+
+                "7. bubbleSort by Student ID \n"+
+                "8. selectionSort by Student ID \n"+
+                "9. Exit \n"+
                 "Choose an option: ");
                 int option = sc.nextInt();
                 if(option==7) {
@@ -133,11 +135,33 @@
 
                         }
                         else {
+                            studentService.sortStudentsById();
+//                            studentService.bubbleSortStudents();
+                            System.out.println("Student sorted successfully");
+                        }
+                        break;
+                    case 7:
+                        if(studentService.isStudentsEmpty()) {
+                            System.out.println("no students found");
+
+                        }
+                        else {
 //                            studentService.sortStudentsById();
                             studentService.bubbleSortStudents();
                             System.out.println("Student sorted successfully");
                         }
                         break;
+                    case 8:
+                        if(studentService.isStudentsEmpty()) {
+                            System.out.println("no students found");
+
+                        }
+                        else {
+                            studentService.selectionSortStudents();
+                            System.out.println("Student sorted successfully");
+                        }
+                        break;
+
                     default:
                         break;
 

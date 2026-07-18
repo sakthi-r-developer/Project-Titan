@@ -97,6 +97,30 @@ public class StudentService{
         return result;
 
     }
+    public void selectionSortStudents(){
+        int n =students.size();
+        for(int i=0;i<n-1;i++){
+            int last=n-i-1;
+            int max=GetMAX(0,last);
+            swap(max,last);
+        }
+        viewStudents();
+    }
+    public int GetMAX(int start,int end){
+        int max=start;
+        for(int i=start;i<=end;i++){
+            if(students.get(i).getId()>students.get(max).getId()){
+                max=i;
+            }
+//            max=Math.max(max,(students.get(i)).getId());
+        }
+        return max;
+    }
+    public void swap(int a,int b){
+        Student temp = students.get(a);
+        students.set(a, students.get(b));
+        students.set(b, temp);
+    }
     public void bubbleSortStudents() {
         int n = students.size();
         Student temp;

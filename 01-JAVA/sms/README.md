@@ -1,71 +1,39 @@
-# 🚀 Project Titan
+# 🎓 Student Management System (Project Titan)
 
-Project Titan is my project-driven learning journey to become internship and placement ready through building real software projects instead of only watching tutorials.
+A console-based Java application built from scratch to strengthen Object-Oriented Programming, problem-solving, and software engineering fundamentals.
 
----
-
-# 📌 Current Project
-
-## Student Management System (Java)
-
-A console-based Student Management System built using Core Java while learning software engineering principles, clean code, and object-oriented programming.
+This project is being developed incrementally as part of **Project Titan**, where every feature is implemented manually before using Java's built-in utilities.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
 - ✅ Add Student
-- ✅ View Students
-- ✅ Search Student
-- ✅ Update Student
+- ✅ View All Students
+- ✅ Search Student by ID
 - ✅ Delete Student
-- ✅ Sort Students by ID
-- ✅ Duplicate ID Validation
+- ✅ Update Student Details
 - ✅ Input Validation
-- ✅ Clean Service Layer Architecture
+- ✅ Duplicate ID Validation
+- ✅ Manual Bubble Sort by Student ID
+- ✅ Manual Selection Sort by Student ID
 
 ---
 
-# 🛠️ Tech Stack
+## 🛠 Technologies
 
 - Java
-- IntelliJ IDEA
-- Git
-- GitHub
-
----
-
-# 📚 Concepts Learned
-
-### Java
-
-- Classes & Objects
-- Constructors
-- Encapsulation
-- Getters & Setters
-- Object References
+- Object-Oriented Programming (OOP)
 - ArrayList
-- Method Extraction
-- Method References
-- Comparator
-- CRUD Operations
-
-### Software Engineering
-
-- Clean Code
-- Refactoring
-- Service Layer
-- Separation of Concerns
-- Validation
-- Reusability
-- Single Responsibility Principle (basic)
+- Scanner
+- Git & GitHub
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
-```
-sms/
+```text
+src/
 │
 ├── Main.java
 ├── Student.java
@@ -74,35 +42,81 @@ sms/
 
 ---
 
-# 📈 Engineering Log
+## 📚 Concepts Practiced
 
-- ✅ Day 1 — Add Student
-- ✅ Day 2 — Search Student
-- ✅ Day 3 — Method Refactoring
-- ✅ Day 4 — StudentService Architecture
-- ✅ Day 5 — Encapsulation & Validation
-- ✅ Day 6 — Update Student Feature
-- ✅ Day 7 — Business Logic Refactoring
-- ✅ Day 8 — Student Sorting
+### Java
+
+- Classes & Objects
+- Constructors
+- Encapsulation
+- Getters & Setters
+- Instance Methods
+- Method Extraction
+- Object References
+
+### OOP
+
+- Separation of Concerns
+- Service Layer Design
+- Data Validation
+- Code Refactoring
+
+### Data Structures & Algorithms
+
+- ArrayList
+- Linear Search
+- Manual Bubble Sort
+- Manual Selection Sort
+- Object Swapping
+- Time & Space Complexity
+- Algorithm Debugging
 
 ---
 
-# 🎯 Upcoming Features
+## 🚀 Development Timeline
 
-- 🔄 Manual Bubble Sort
-- Exception Handling
-- File Storage
-- Load Data from File
-- Collections Improvements
-- JDBC Integration
-- Unit Testing
-- Logging
-- Maven Project Structure
+| Day | Progress |
+|------|----------|
+| 1 | Basic Student Management System |
+| 2 | Search Student |
+| 3 | Delete Student |
+| 4 | Refactored into StudentService |
+| 5 | Validation & Encapsulation |
+| 6 | Update Student Feature |
+| 7 | Business Logic moved to Service Layer |
+| 8 | Student Sorting Feature |
+| 9 | Implemented Manual Bubble Sort |
+| 10 | Implemented Manual Selection Sort |
 
 ---
 
-# 🧠 Learning Goal
+## 🎯 Future Improvements
 
-This repository documents my journey of learning software engineering through building projects from scratch, improving them every day, and applying clean architecture and object-oriented programming principles.
+- ⏳ Manual Insertion Sort
+- ⏳ Sort by Name
+- ⏳ Binary Search
+- ⏳ File Storage
+- ⏳ Exception Handling
+- ⏳ Custom Exceptions
+- ⏳ Database Integration (JDBC + MySQL)
+- ⏳ JUnit Testing
+- ⏳ JavaFX/Swing GUI
+- ⏳ REST API using Spring Boot
 
-The goal is to become internship and placement ready by writing maintainable, readable, and scalable Java code.
+---
+
+## 📖 Learning Philosophy
+
+Project Titan emphasizes learning by building.
+
+Every feature is first implemented manually to understand the underlying concepts before using Java's built-in libraries.
+
+The goal is not just to build a project, but to become a better software engineer.
+
+---
+
+## 👨‍💻 Author
+
+**Sakthi R**
+
+Project Titan – Engineering Log Series 🚀
