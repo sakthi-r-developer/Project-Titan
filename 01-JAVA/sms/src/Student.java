@@ -9,6 +9,7 @@ public class Student {
         this.age = age;
         this.department = department;
     }
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("___________________________\n");

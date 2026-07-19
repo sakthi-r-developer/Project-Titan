@@ -10,13 +10,15 @@ This project is being developed incrementally as part of **Project Titan**, wher
 
 - ✅ Add Student
 - ✅ View All Students
-- ✅ Search Student by ID
+- ✅ Search Student (Linear Search)
 - ✅ Delete Student
 - ✅ Update Student Details
 - ✅ Input Validation
 - ✅ Duplicate ID Validation
-- ✅ Manual Bubble Sort by Student ID
-- ✅ Manual Selection Sort by Student ID
+- ✅ Manual Bubble Sort
+- ✅ Manual Selection Sort
+- ✅ Manual Binary Search
+- ✅ Load Dummy Students for Testing
 
 ---
 

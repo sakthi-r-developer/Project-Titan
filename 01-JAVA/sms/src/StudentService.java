@@ -32,6 +32,24 @@ public class StudentService{
 //        else if(student.searchStudent())
         else return "Unknown validation error";
     }
+    public void addDummyStudents() {
+
+        if(!students.isEmpty()) {
+            System.out.println("Dummy students already loaded");
+            return;
+        }
+
+        addStudent(new Student(101, "Sakthi", 19, "IT"));
+        addStudent(new Student(102, "Arun", 20, "CSE"));
+        addStudent(new Student(103, "Vijay", 18, "ECE"));
+        addStudent(new Student(104, "Karthik", 21, "EEE"));
+        addStudent(new Student(105, "Rahul", 19, "MECH"));
+        addStudent(new Student(106, "Ajay", 20, "IT"));
+        addStudent(new Student(107, "Surya", 18, "CSE"));
+        addStudent(new Student(108, "Praveen", 22, "ECE"));
+        addStudent(new Student(109, "Manoj", 19, "EEE"));
+        addStudent(new Student(110, "Hari", 20, "MECH"));
+    }
     public boolean addStudent(Student student){
         if(isValidStudent(student)) {
             students.add(student);
@@ -49,14 +67,37 @@ public class StudentService{
     }
 
     public Student searchStudent(int searchId) {
-
+        int count=0;
         for (Student student: students) {
+            count++;
             if(student.getId() == searchId) {
+                System.out.println(count+" Comparisons");
                 return student;
             }
         }
         return null;
 
+    }
+    public Student binarySearchStudent(int searchId) {
+        int start=0;
+        int end=students.size()-1;
+        int count=0;
+        while(start<=end) {
+            int mid=start+(end-start)/2;
+            count++;
+            if(searchId==students.get(mid).getId()) {
+                System.out.println(count+" comparisons");
+                return students.get(mid);
+            }
+            else if(searchId<students.get(mid).getId()) {
+                end=mid-1;
+            }
+            else {
+                start=mid+1;
+            }
+        }
+
+        return null;
     }
     public boolean deleteStudent( int deleteId) {
         Student student = searchStudent(deleteId);
@@ -106,7 +147,7 @@ public class StudentService{
         }
         viewStudents();
     }
-    public int GetMAX(int start,int end){
+    private int GetMAX(int start,int end){
         int max=start;
         for(int i=start;i<=end;i++){
             if(students.get(i).getId()>students.get(max).getId()){
@@ -116,7 +157,7 @@ public class StudentService{
         }
         return max;
     }
-    public void swap(int a,int b){
+    private void swap(int a,int b){
         Student temp = students.get(a);
         students.set(a, students.get(b));
         students.set(b, temp);
@@ -142,15 +183,17 @@ public class StudentService{
             // Already sorted
             if (!swapped) break;
         }
-        viewStudents();
+
 
     }
+
     public void sortStudentsById() {
         students.sort(Comparator.comparing(Student::getId));
-        viewStudents();
+
     }
 
     public boolean isStudentsEmpty() {
         return students.isEmpty();
     }
+
 }

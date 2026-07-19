@@ -12,7 +12,9 @@
             StudentService studentService = new StudentService();
             Scanner sc = new Scanner(System.in);
             while (true) {
-                System.out.println("1. Add Student \n"+
+                System.out.println(
+                "0. Add DummyStudents\n"+
+                "1. Add Student \n"+
                 "2. View Students \n"+
                 "3. Search Student \n"+
                 "4. Delete Student \n"+
@@ -20,13 +22,19 @@
                 "6. Sort Students by ID \n"+
                 "7. bubbleSort by Student ID \n"+
                 "8. selectionSort by Student ID \n"+
-                "9. Exit \n"+
+                "9. binarySearchStudent by Student ID \n"+
+                "10. Exit \n"+
                 "Choose an option: ");
                 int option = sc.nextInt();
-                if(option==7) {
+                if(option==10) {
                     break;
                 }
                 switch (option) {
+                    case 0:
+                        studentService.addDummyStudents();
+                        System.out.println("Add Student Successful");
+                        break;
+
                     case 1:
                         System.out.println(
                                 "Enter Student ID: "
@@ -137,6 +145,7 @@
                         else {
                             studentService.sortStudentsById();
 //                            studentService.bubbleSortStudents();
+                            studentService.viewStudents();
                             System.out.println("Student sorted successfully");
                         }
                         break;
@@ -148,6 +157,7 @@
                         else {
 //                            studentService.sortStudentsById();
                             studentService.bubbleSortStudents();
+                            studentService.viewStudents();
                             System.out.println("Student sorted successfully");
                         }
                         break;
@@ -161,6 +171,24 @@
                             System.out.println("Student sorted successfully");
                         }
                         break;
+                    case 9:
+                        if(studentService.isStudentsEmpty()) {
+                            System.out.println("no students found");
+                        }
+                        else{
+                            System.out.println("Enter searchId :");
+                            int binarysearchId = sc.nextInt();
+                            sc.nextLine();
+                            Student foundBSStudent=studentService.binarySearchStudent( binarysearchId);
+                            if(foundBSStudent!=null) {
+                                System.out.println(foundBSStudent);
+                            }
+                            else{
+                                System.out.println("Student not found");
+                            }
+                        }
+                        break;
+
 
                     default:
                         break;
