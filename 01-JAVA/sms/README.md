@@ -1,24 +1,27 @@
 # 🎓 Student Management System (Project Titan)
 
-A console-based Java application built from scratch to strengthen Object-Oriented Programming, problem-solving, and software engineering fundamentals.
+A console-based Java application built from scratch to strengthen Object-Oriented Programming, Data Structures & Algorithms, and Software Engineering fundamentals.
 
-This project is being developed incrementally as part of **Project Titan**, where every feature is implemented manually before using Java's built-in utilities.
+This project is developed incrementally as part of **Project Titan**, where every feature is implemented manually before relying on Java's built-in utilities.
 
 ---
 
 ## ✨ Features
 
 - ✅ Add Student
+- ✅ Load Dummy Students
 - ✅ View All Students
 - ✅ Search Student (Linear Search)
+- ✅ Search Student (Binary Search)
 - ✅ Delete Student
 - ✅ Update Student Details
 - ✅ Input Validation
 - ✅ Duplicate ID Validation
 - ✅ Manual Bubble Sort
 - ✅ Manual Selection Sort
-- ✅ Manual Binary Search
-- ✅ Load Dummy Students for Testing
+- ✅ Built-in Comparator Sort
+- ✅ Numeric Input Validation
+- ✅ Exception Handling for Invalid Number Input
 
 ---
 
@@ -28,6 +31,7 @@ This project is being developed incrementally as part of **Project Titan**, wher
 - Object-Oriented Programming (OOP)
 - ArrayList
 - Scanner
+- Exception Handling
 - Git & GitHub
 
 ---
@@ -55,6 +59,8 @@ src/
 - Instance Methods
 - Method Extraction
 - Object References
+- Exception Handling
+- try-catch
 
 ### OOP
 
@@ -67,11 +73,11 @@ src/
 
 - ArrayList
 - Linear Search
+- Binary Search
 - Manual Bubble Sort
 - Manual Selection Sort
 - Object Swapping
 - Time & Space Complexity
-- Algorithm Debugging
 
 ---
 
@@ -89,18 +95,19 @@ src/
 | 8 | Student Sorting Feature |
 | 9 | Implemented Manual Bubble Sort |
 | 10 | Implemented Manual Selection Sort |
+| 11 | Implemented Manual Binary Search |
+| 12 | Exception Handling & Numeric Input Validation |
 
 ---
 
 ## 🎯 Future Improvements
 
-- ⏳ Manual Insertion Sort
-- ⏳ Sort by Name
-- ⏳ Binary Search
-- ⏳ File Storage
-- ⏳ Exception Handling
+- ⏳ Refactor repeated input validation into reusable helper methods
 - ⏳ Custom Exceptions
+- ⏳ Sort by Name
+- ⏳ File Storage
 - ⏳ Database Integration (JDBC + MySQL)
+- ⏳ Collections Framework Improvements
 - ⏳ JUnit Testing
 - ⏳ JavaFX/Swing GUI
 - ⏳ REST API using Spring Boot
@@ -113,7 +120,7 @@ Project Titan emphasizes learning by building.
 
 Every feature is first implemented manually to understand the underlying concepts before using Java's built-in libraries.
 
-The goal is not just to build a project, but to become a better software engineer.
+The goal is not just to build a project, but to become a better software engineer through consistent engineering practice.
 
 ---
 

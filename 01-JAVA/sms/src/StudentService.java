@@ -50,6 +50,19 @@ public class StudentService{
         addStudent(new Student(109, "Manoj", 19, "EEE"));
         addStudent(new Student(110, "Hari", 20, "MECH"));
     }
+    public boolean isNumeric(String id){
+        try {
+            Integer.parseInt(id);
+        }
+        catch(NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
+    public boolean isValidChoice(int choice){
+        return choice >10 || choice <0;
+    }
+
     public boolean addStudent(Student student){
         if(isValidStudent(student)) {
             students.add(student);
@@ -123,7 +136,13 @@ public class StudentService{
                 result = true;
                 break;
             case 2:
-                studentToUpdate.setAge(Integer.parseInt(value));
+                if(isNumeric(value)) {
+                    studentToUpdate.setAge(Integer.parseInt(value));
+                }
+//                studentToUpdate.setAge(Integer.parseInt(value));
+                else{
+                    System.out.println("Enter according datatype ..");
+                }
                 result = true;
                 break;
             case 3:

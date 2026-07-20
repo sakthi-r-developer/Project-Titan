@@ -1,5 +1,6 @@
 
     import java.util.ArrayList;
+    import java.util.InputMismatchException;
     import java.util.Scanner;
 
 
@@ -39,7 +40,24 @@
                         System.out.println(
                                 "Enter Student ID: "
                         );
-                        int id = sc.nextInt();
+
+                        int id = -1;
+                        while(id==-1) {
+//                            try {
+//                                id = Integer.parseInt(sc.next());
+//                            } catch (NumberFormatException e) {
+//                                System.out.println("Please enter a valid Student ID");
+//                            }
+                            String idStr = sc.next();
+                            if(studentService.isNumeric(idStr)){
+                                id = Integer.parseInt(idStr);
+                                break;
+                            }
+                            else{
+                                System.out.println("Invalid ID \n");
+                                System.out.println("Enter Student ID: ");
+                            }
+                        }
                         sc.nextLine();
 
 
@@ -55,7 +73,24 @@
                         System.out.println(
                                 "Enter Student Age: "
                         );
-                        int age = sc.nextInt();
+                        int age=-1;
+                        while(age==-1) {
+//                            try {
+//                                age = Integer.parseInt( sc.next());
+//                            } catch (NumberFormatException e) {
+//                                System.out.println("Please enter a valid Student Age");
+//                            }
+                            String ageStr = sc.next();
+                            if(studentService.isNumeric(ageStr)){
+                                age = Integer.parseInt(ageStr);
+                                break;
+                            }
+                            else{
+                                System.out.println("Invalid Age Format\n");
+                                System.out.println("Enter Student Age: ");
+                            }
+                        }
+
                         sc.nextLine();
                         System.out.println(
                                 "Enter Student Department: "
@@ -84,7 +119,26 @@
                         break;
                     case 3:
                         System.out.println("Enter Student ID: ");
-                        int searchId = sc.nextInt();
+
+//                        int searchId = sc.nextInt();
+                        int searchId = -1;
+                        while(searchId==-1) {
+//                            try {
+//                                searchId = Integer.parseInt(sc.next());
+//                            }
+//                            catch(NumberFormatException e) {
+//                                System.out.println("Please enter a valid Student ID");
+//                            }
+                            String idStr = sc.next();
+                            if(studentService.isNumeric(idStr)){
+                                searchId = Integer.parseInt(idStr);
+                                break;
+                            }
+                            else{
+                                System.out.println("Invalid ID \n");
+                                System.out.println("Enter Student ID: ");
+                            }
+                        }
                         sc.nextLine();
                         Student foundStudent=studentService.searchStudent( searchId);
                         if(foundStudent!=null) {
@@ -97,7 +151,25 @@
                         break;
                     case 4:
                         System.out.println("Enter Student ID: ");
-                        int deleteId = sc.nextInt();
+//                        int deleteId = sc.nextInt();
+                        int deleteId = -1;
+                        while(deleteId==-1) {
+//                            try {
+//                                deleteId = Integer.parseInt(sc.next());
+//                            }
+//                            catch(NumberFormatException e) {
+//                                System.out.println("Please enter a valid Student ID");
+//                            }
+                            String idStr = sc.next();
+                            if(studentService.isNumeric(idStr)){
+                                deleteId = Integer.parseInt(idStr);
+                                break;
+                            }
+                            else{
+                                System.out.println("Invalid ID \n");
+                                System.out.println("Enter Student ID: ");
+                            }
+                        }
                         sc.nextLine();
                         if(studentService.deleteStudent(deleteId)){
                             System.out.println("Student deleted successfully");
@@ -108,7 +180,26 @@
                         break;
                     case 5:
                         System.out.println("Enter Student ID: ");
-                        int updateId = sc.nextInt();
+//                        int updateId = sc.nextInt();
+                        int updateId = -1;
+                        while(updateId==-1) {
+//                            try {
+//                                updateId = Integer.parseInt(sc.next());
+//                            }
+//                            catch(NumberFormatException e) {
+//                                System.out.println("Please enter a valid Student ID");
+//                            }
+                            String idStr = sc.next();
+
+                            if(studentService.isNumeric(idStr)){
+                                updateId = Integer.parseInt(idStr);
+                                break;
+                            }
+                            else{
+                                System.out.println("Invalid ID \n");
+                                System.out.println("Enter Student ID: ");
+                            }
+                        }
                         sc.nextLine();
 
 //                        Student studentToUpdate = studentService.searchStudent(updateId);
@@ -126,7 +217,27 @@
                                 "2.Age\n"+
                                 "3.Department\n"+
                                 "Enter Choice: ");
-                        int  choice = sc.nextInt();
+
+//                        int  choice = sc.nextInt();
+                        int choice = -1;
+                        while(choice==-1) {
+//                            try {
+//                                choice = Integer.parseInt(sc.next());
+//                            }
+//                            catch(NumberFormatException e) {
+//                                System.out.println("Please enter a valid Choice");
+//                            }
+                            String choiceStr = sc.next();
+                            if(studentService.isNumeric(choiceStr)){
+                                choice = Integer.parseInt(choiceStr);
+                                if(studentService.isValidChoice(choice)){}
+                                break;
+                            }
+                            else{
+                                System.out.println("Invalid Choice \n");
+                                System.out.println("Choose Choice: ");
+                            }
+                        }
                         sc.nextLine();
                         System.out.println("Enter Value: ");
                         String value = sc.nextLine();
@@ -177,7 +288,19 @@
                         }
                         else{
                             System.out.println("Enter searchId :");
-                            int binarysearchId = sc.nextInt();
+//                            int binarysearchId = sc.nextInt();
+                            int binarysearchId = -1;
+                            while(binarysearchId==-1) {
+                                String idStr = sc.next();
+                                if(studentService.isNumeric(idStr)){
+                                    binarysearchId = Integer.parseInt(idStr);
+                                    break;
+                                }
+                                else{
+                                    System.out.println("Invalid ID \n");
+                                    System.out.println("Enter searchId :");
+                                }
+                            }
                             sc.nextLine();
                             Student foundBSStudent=studentService.binarySearchStudent( binarysearchId);
                             if(foundBSStudent!=null) {
