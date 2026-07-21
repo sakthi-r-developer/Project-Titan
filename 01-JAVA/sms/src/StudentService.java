@@ -50,7 +50,7 @@ public class StudentService{
         addStudent(new Student(109, "Manoj", 19, "EEE"));
         addStudent(new Student(110, "Hari", 20, "MECH"));
     }
-    public boolean isNumeric(String id){
+    public static boolean isNumeric(String id){
         try {
             Integer.parseInt(id);
         }
@@ -59,8 +59,8 @@ public class StudentService{
         }
         return true;
     }
-    public boolean isValidChoice(int choice){
-        return choice >10 || choice <0;
+    public static boolean isValidChoice(int choice){
+        return choice <=10 &&  choice >=0;
     }
 
     public boolean addStudent(Student student){
@@ -136,14 +136,14 @@ public class StudentService{
                 result = true;
                 break;
             case 2:
-                if(isNumeric(value)) {
+                if(isNumeric(value) && InputHelper.isValidAge(value)) {
                     studentToUpdate.setAge(Integer.parseInt(value));
+                    result = true;
                 }
 //                studentToUpdate.setAge(Integer.parseInt(value));
                 else{
                     System.out.println("Enter according datatype ..");
                 }
-                result = true;
                 break;
             case 3:
                 studentToUpdate.setDepartment(value);
@@ -161,12 +161,12 @@ public class StudentService{
         int n =students.size();
         for(int i=0;i<n-1;i++){
             int last=n-i-1;
-            int max=GetMAX(0,last);
+            int max=getMAX(0,last);
             swap(max,last);
         }
         viewStudents();
     }
-    private int GetMAX(int start,int end){
+    private int getMAX(int start,int end){
         int max=start;
         for(int i=start;i<=end;i++){
             if(students.get(i).getId()>students.get(max).getId()){

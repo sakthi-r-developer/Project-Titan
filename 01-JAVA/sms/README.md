@@ -9,19 +9,17 @@ This project is developed incrementally as part of **Project Titan**, where ever
 ## ✨ Features
 
 - ✅ Add Student
-- ✅ Load Dummy Students
-- ✅ View All Students
-- ✅ Search Student (Linear Search)
-- ✅ Search Student (Binary Search)
+- ✅ View Students
+- ✅ Search Student
 - ✅ Delete Student
-- ✅ Update Student Details
+- ✅ Update Student
 - ✅ Input Validation
 - ✅ Duplicate ID Validation
+- ✅ Dummy Student Generator
 - ✅ Manual Bubble Sort
 - ✅ Manual Selection Sort
-- ✅ Built-in Comparator Sort
-- ✅ Numeric Input Validation
-- ✅ Exception Handling for Invalid Number Input
+- ✅ Binary Search
+- ✅ Centralized Input Handling
 
 ---
 
@@ -43,11 +41,17 @@ src/
 │
 ├── Main.java
 ├── Student.java
-└── StudentService.java
+├── StudentService.java
+├── InputHelper.java
+│
+└── (Future)
+    ├── FileStorage.java
+    ├── StudentRepository.java
+    ├── StudentException.java
+    └── StudentDatabase.java
 ```
 
 ---
-
 ## 📚 Concepts Practiced
 
 ### Java
