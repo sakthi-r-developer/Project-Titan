@@ -1,4 +1,4 @@
-# 🎓 Student Management System (Project Titan)
+# 🎓 model.Student Management System (Project Titan)
 
 A console-based Java application built from scratch to strengthen Object-Oriented Programming, Data Structures & Algorithms, and Software Engineering fundamentals.
 
@@ -8,18 +8,20 @@ This project is developed incrementally as part of **Project Titan**, where ever
 
 ## ✨ Features
 
-- ✅ Add Student
+-- ✅ Add Student
 - ✅ View Students
 - ✅ Search Student
 - ✅ Delete Student
 - ✅ Update Student
+- ✅ Dummy Student Generator
 - ✅ Input Validation
 - ✅ Duplicate ID Validation
-- ✅ Dummy Student Generator
 - ✅ Manual Bubble Sort
 - ✅ Manual Selection Sort
 - ✅ Binary Search
-- ✅ Centralized Input Handling
+- ✅ Custom Exception Handling
+- ✅ Validator Utility
+- ✅ Modular Package Structure
 
 ---
 
@@ -36,20 +38,40 @@ This project is developed incrementally as part of **Project Titan**, where ever
 
 ## 📂 Project Structure
 
-```text
 src/
 │
-├── Main.java
-├── Student.java
-├── StudentService.java
-├── InputHelper.java
+├── app/
+│   └── Main.java
+│
+├── model/
+│   └── Student.java
+│
+├── service/
+│   └── StudentService.java
+│
+├── util/
+│   └── InputHelper.java
+│
+├── validation/
+│   └── Validator.java
+│
+├── exceptions/
+│   ├── DuplicateStudentException.java
+│   ├── InvalidAgeException.java
+│   ├── InvalidChoiceException.java
+│   ├── InvalidStudentException.java
+│   └── StudentNotFoundException.java
 │
 └── (Future)
-    ├── FileStorage.java
-    ├── StudentRepository.java
-    ├── StudentException.java
-    └── StudentDatabase.java
-```
+    ├── repository/
+    │   └── StudentRepository.java
+    │
+    ├── storage/
+    │   ├── FileStorage.java
+    │   └── StudentDatabase.java
+    │
+    └── exceptions/
+        └── StudentException.java
 
 ---
 ## 📚 Concepts Practiced
@@ -89,14 +111,14 @@ src/
 
 | Day | Progress |
 |------|----------|
-| 1 | Basic Student Management System |
-| 2 | Search Student |
-| 3 | Delete Student |
-| 4 | Refactored into StudentService |
+| 1 | Basic model.Student Management System |
+| 2 | Search model.Student |
+| 3 | Delete model.Student |
+| 4 | Refactored into service.StudentService |
 | 5 | Validation & Encapsulation |
-| 6 | Update Student Feature |
+| 6 | Update model.Student Feature |
 | 7 | Business Logic moved to Service Layer |
-| 8 | Student Sorting Feature |
+| 8 | model.Student Sorting Feature |
 | 9 | Implemented Manual Bubble Sort |
 | 10 | Implemented Manual Selection Sort |
 | 11 | Implemented Manual Binary Search |

@@ -1,38 +1,20 @@
+package service;
+
+import Validation.Validator;
+import exceptions.InvalidStudentException;
+import exceptions.StudentNotFoundException;
+import model.Student;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class StudentService{
-    private ArrayList<Student> students;
+    private static ArrayList<Student> students;
     public StudentService(){
         students = new ArrayList<>();
     }
-    public boolean isValidStudent(Student student){
-        if(student.getId()<=0 || searchStudent(student.getId())!=null || student.getName().trim().isEmpty() || student.getDepartment().trim().isEmpty() || student.getAge()<16 || student.getAge()>100) {
-            return false;
-        }
-        else return true;
-    }
-    public String inValidDetail(Student student){
-        if(student.getId()<=0 ) {
-            return "Invalid ID";
-        }
-        else if(searchStudent(student.getId())!=null) {
-            return "Student with ID "+student.getId()+" already exists";
-        }
-        else if(student.getName().trim().isEmpty()) {
-            return "Invalid Name";
-        }
-        else if(student.getDepartment().trim().isEmpty()) {
-            return "Invalid Department";
-        }
-        else if(student.getAge()<16 || student.getAge()>100) {
-            return "Invalid Age";
-        }
-//        else if(student.searchStudent())
-        else return "Unknown validation error";
-    }
-    public void addDummyStudents() {
+
+    public void addDummyStudents() throws InvalidStudentException{
 
         if(!students.isEmpty()) {
             System.out.println("Dummy students already loaded");
@@ -50,36 +32,27 @@ public class StudentService{
         addStudent(new Student(109, "Manoj", 19, "EEE"));
         addStudent(new Student(110, "Hari", 20, "MECH"));
     }
-    public static boolean isNumeric(String id){
-        try {
-            Integer.parseInt(id);
-        }
-        catch(NumberFormatException e){
-            return false;
-        }
-        return true;
-    }
-    public static boolean isValidChoice(int choice){
-        return choice <=10 &&  choice >=0;
-    }
 
-    public boolean addStudent(Student student){
-        if(isValidStudent(student)) {
-            students.add(student);
-            return true;
-        }
-        else{
-            System.out.println(inValidDetail(student));
-            return false;
-        }
+    public void addStudent(Student student) throws InvalidStudentException{
+
+        students.add(student);
+
     }
     public void viewStudents() {
         for (Student student : students) {
             System.out.println(student);
         }
     }
+    public static boolean studentExists(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    public Student searchStudent(int searchId) {
+    public static Student searchStudent(int searchId) throws StudentNotFoundException {
         int count=0;
         for (Student student: students) {
             count++;
@@ -88,7 +61,8 @@ public class StudentService{
                 return student;
             }
         }
-        return null;
+        throw new StudentNotFoundException("Student not found");
+//      return null;
 
     }
     public Student binarySearchStudent(int searchId) {
@@ -112,23 +86,13 @@ public class StudentService{
 
         return null;
     }
-    public boolean deleteStudent( int deleteId) {
+    public void deleteStudent( int deleteId) throws StudentNotFoundException {
         Student student = searchStudent(deleteId);
-        if(student!=null) {
-            students.remove(student);
-            return true;
-        }
-        else{
-            return false;
-        }
-
+        students.remove(student);
     }
 
-    public boolean updateStudent(int updateId,int choice,String value) {
+    public boolean updateStudent(int updateId,int choice,String value) throws StudentNotFoundException {
         Student studentToUpdate = searchStudent(updateId);
-        if(studentToUpdate==null) {
-            return false;
-        }
         boolean result = false;
         switch (choice) {
             case 1:
@@ -136,11 +100,10 @@ public class StudentService{
                 result = true;
                 break;
             case 2:
-                if(isNumeric(value) && InputHelper.isValidAge(value)) {
+                if(Validator.isNumeric(value) && Validator.isValidAge(value)) {
                     studentToUpdate.setAge(Integer.parseInt(value));
                     result = true;
                 }
-//                studentToUpdate.setAge(Integer.parseInt(value));
                 else{
                     System.out.println("Enter according datatype ..");
                 }
@@ -161,12 +124,12 @@ public class StudentService{
         int n =students.size();
         for(int i=0;i<n-1;i++){
             int last=n-i-1;
-            int max=getMAX(0,last);
+            int max=getMax(0,last);
             swap(max,last);
         }
         viewStudents();
     }
-    private int getMAX(int start,int end){
+    private int getMax(int start,int end){
         int max=start;
         for(int i=start;i<=end;i++){
             if(students.get(i).getId()>students.get(max).getId()){

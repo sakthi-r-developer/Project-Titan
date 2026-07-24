@@ -1,6 +1,11 @@
+package app;
 
-    import java.util.ArrayList;
-    import java.util.InputMismatchException;
+import Validation.Validator;
+import exceptions.*;
+import model.Student;
+    import service.StudentService;
+    import util.InputHelper;
+
     import java.util.Scanner;
 
 
@@ -9,7 +14,7 @@
         // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
-        public static void main(String[] args) {
+        public static void main(String[] args) throws StudentNotFoundException, InvalidChoiceException {
             StudentService studentService = new StudentService();
             Scanner sc = new Scanner(System.in);
             while (true) {
@@ -19,26 +24,38 @@
                 }
                 switch (option) {
                     case 0:
-                        studentService.addDummyStudents();
-                        System.out.println("Add Student Successful");
+                        try {
+                            studentService.addDummyStudents();
+                            System.out.println("Add Student Successful");
+                        }
+                        catch (InvalidStudentException e) {
+                            System.out.println(e.getMessage());
+                        }
                         break;
 
                     case 1:
                         int id=InputHelper.readInt(sc,"Enter Student ID:");
                         sc.nextLine();
-                        String name=InputHelper.readString(sc,"Enter Student Name:");
+                        String name= InputHelper.readString(sc,"Enter Student Name:");
                         int age=InputHelper.readInt(sc,"Enter Student Age:");
 
                         sc.nextLine();
                         String department=InputHelper.readString(sc,"Enter Student Department:");
                         Student student = new Student(id, name, age, department);
 
-
-                        if(studentService.addStudent(student)){
-                            System.out.println("Student added successfully");
+                        try{
+                            Validator.validateStudent(student);
+                            studentService.addStudent(student);
+                            System.out.println("Add Student Successful");
                         }
-                        else{
-                            System.out.println("Failed to add student.");
+                        catch (InvalidStudentException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        catch (InvalidAgeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        catch (DuplicateStudentException e) {
+                            System.out.println(e.getMessage());
                         }
 
                         break;
@@ -55,46 +72,44 @@
                     case 3:
                         int searchId = InputHelper.readInt(sc,"Enter Student ID:");
                         sc.nextLine();
-                        Student foundStudent=studentService.searchStudent( searchId);
-                        if(foundStudent!=null) {
-                            System.out.println(foundStudent);
+                        try{
+                            studentService.deleteStudent(searchId);
                             System.out.println("Student found successfully");
                         }
-                        else{
-                            System.out.println("Student not found");
+                        catch(StudentNotFoundException e){
+                            System.out.println(e.getMessage());
                         }
                         break;
                     case 4:
                         int deleteId = InputHelper.readInt(sc,"Enter Student ID:");
                         sc.nextLine();
-                        if(studentService.deleteStudent(deleteId)){
-                            System.out.println("Student deleted successfully");
+                        try{
+                            studentService.deleteStudent(deleteId);
+                            System.out.println("Student delete successfully");
                         }
-                        else{
-                            System.out.println("Student not deleted successfully");
+                        catch(StudentNotFoundException e){
+                            System.out.println(e.getMessage());
                         }
                         break;
                     case 5:
                         int updateId = InputHelper.readInt(sc,"Enter Student ID:");
                         sc.nextLine();
 
-                        System.out.println("Choose Field: \n"+
-                                "1.Name\n"+
-                                "2.Age\n"+
-                                "3.Department\n"+
-                                "Enter Choice: ");
+                        System.out.println("Choose Field: \n  1.Name \n 2.Age \n 3.Department \n");
 
                         int choice = -1;
                         while(choice==-1) {
+                            System.out.println("Enter Choice: ");
                             String choiceStr = sc.next();
-                            if(studentService.isNumeric(choiceStr)){
-                                choice = Integer.parseInt(choiceStr);
-                                if(studentService.isValidChoice(choice)){}
-                                break;
+                            try {
+                                if (Validator.isNumeric(choiceStr)) {
+                                    choice = Integer.parseInt(choiceStr);
+                                    if (Validator.isValidChoice(choice))
+                                        System.out.println("Valid Choice.");
+                                }
                             }
-                            else{
-                                System.out.println("Invalid Choice \n");
-                                System.out.println("Choose Choice: ");
+                            catch (InvalidChoiceException e) {
+                                System.out.println(e.getMessage());
                             }
                         }
                         sc.nextLine();
