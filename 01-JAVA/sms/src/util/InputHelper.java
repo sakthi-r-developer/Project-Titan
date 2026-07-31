@@ -27,15 +27,15 @@ public class InputHelper {
         while (true) {
             System.out.println(
                     "0. Add DummyStudents\n"+
-                            "1. Add mode1.Student \n"+
+                            "1. Add Student \n"+
                             "2. View Students \n"+
-                            "3. Search mode1.Student \n"+
-                            "4. Delete mode1.Student \n"+
-                            "5. Update mode1.Student \n"+
+                            "3. Search Student \n"+
+                            "4. Delete Student \n"+
+                            "5. Update Student \n"+
                             "6. Sort Students by ID \n"+
-                            "7. bubbleSort by mode1.Student ID \n"+
-                            "8. selectionSort by mode1.Student ID \n"+
-                            "9. binarySearchStudent by mode1.Student ID \n"+
+                            "7. bubbleSort by Student ID \n"+
+                            "8. selectionSort by Student ID \n"+
+                            "9. binarySearchStudent by Student ID \n"+
                             "10. Exit \n"+
                             "Choose an option: ");
             String input = sc.next();

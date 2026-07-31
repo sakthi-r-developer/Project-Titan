@@ -3,23 +3,29 @@ package app;
 import Validation.Validator;
 import exceptions.*;
 import model.Student;
-    import service.StudentService;
-    import util.InputHelper;
+import service.StudentService;
+import util.InputHelper;
 
-    import java.util.Scanner;
+import java.io.IOException;
+import java.util.Scanner;
+
+import static util.FileHandler.loadStudents;
+import static util.FileHandler.saveStudents;
 
 
-    class Main {
+class Main {
         //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
         // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
-        public static void main(String[] args) throws StudentNotFoundException, InvalidChoiceException {
+        public static void main(String[] args) throws StudentNotFoundException, InvalidChoiceException, IOException {
             StudentService studentService = new StudentService();
             Scanner sc = new Scanner(System.in);
+            StudentService.setStudents(loadStudents());
             while (true) {
                 int option = InputHelper.readMenuChoice(sc);
                 if(option==10) {
+                    saveStudents(StudentService.getStudents());
                     break;
                 }
                 switch (option) {
@@ -73,7 +79,8 @@ import model.Student;
                         int searchId = InputHelper.readInt(sc,"Enter Student ID:");
                         sc.nextLine();
                         try{
-                            studentService.deleteStudent(searchId);
+                            Student searchStudent = StudentService.searchStudent(searchId);
+                            System.out.println(searchStudent);
                             System.out.println("Student found successfully");
                         }
                         catch(StudentNotFoundException e){
@@ -135,7 +142,6 @@ import model.Student;
                     case 7:
                         if(studentService.isStudentsEmpty()) {
                             System.out.println("no students found");
-
                         }
                         else {
                             studentService.bubbleSortStudents();

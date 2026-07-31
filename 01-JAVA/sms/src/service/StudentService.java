@@ -10,8 +10,16 @@ import java.util.Comparator;
 
 public class StudentService{
     private static ArrayList<Student> students;
-    public StudentService(){
-        students = new ArrayList<>();
+    public StudentService() {
+        if (students == null) {
+            students = new ArrayList<>();
+        }
+    }
+    public static ArrayList<Student> getStudents(){
+        return students;
+    }
+    public static void setStudents(ArrayList<Student> students){
+        StudentService.students = students;
     }
 
     public void addDummyStudents() throws InvalidStudentException{

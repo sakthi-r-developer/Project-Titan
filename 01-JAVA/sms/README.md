@@ -8,7 +8,7 @@ This project is developed incrementally as part of **Project Titan**, where ever
 
 ## ✨ Features
 
--- ✅ Add Student
+- ✅ Add Student
 - ✅ View Students
 - ✅ Search Student
 - ✅ Delete Student
@@ -22,8 +22,21 @@ This project is developed incrementally as part of **Project Titan**, where ever
 - ✅ Custom Exception Handling
 - ✅ Validator Utility
 - ✅ Modular Package Structure
+- ✅ Save Students to File
+- ✅ Load Students from File
+- ✅ Persistent Student Records
 
 ---
+### Software Engineering
+
+- Separation of Concerns
+- Package Organization
+- Utility Classes
+- Validation Layer
+- Custom Exceptions
+- Clean Architecture
+- File Handling
+- Data Persistence
 
 ## 🛠 Technologies
 
@@ -137,6 +150,15 @@ src/
 - ⏳ JUnit Testing
 - ⏳ JavaFX/Swing GUI
 - ⏳ REST API using Spring Boot
+
+| Day | Progress |
+|------|----------|
+| 10 | Manual Selection Sort |
+| 11 | Binary Search |
+| 12 | Input Validation & Dummy Data Generator |
+| 13 | InputHelper Utility Class & Refactoring |
+| 14 | Packages, Validator & Custom Exceptions |
+| 15 | File Handling & Data Persistence |
 
 ---
 
