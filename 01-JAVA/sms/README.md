@@ -19,12 +19,11 @@ This project is developed incrementally as part of **Project Titan**, where ever
 - ✅ Manual Bubble Sort
 - ✅ Manual Selection Sort
 - ✅ Binary Search
+- ✅ File Save & Load (TXT)
 - ✅ Custom Exception Handling
 - ✅ Validator Utility
+- ✅ Repository Layer
 - ✅ Modular Package Structure
-- ✅ Save Students to File
-- ✅ Load Students from File
-- ✅ Persistent Student Records
 
 ---
 ### Software Engineering
@@ -141,15 +140,12 @@ src/
 
 ## 🎯 Future Improvements
 
-- ⏳ Refactor repeated input validation into reusable helper methods
-- ⏳ Custom Exceptions
-- ⏳ Sort by Name
-- ⏳ File Storage
-- ⏳ Database Integration (JDBC + MySQL)
-- ⏳ Collections Framework Improvements
+- ⏳ Improve Repository Encapsulation
+- ⏳ Remove direct `getStudents()` usage from Service
+- ⏳ Refactor Sorting Operations into Repository
+- ⏳ Logging
 - ⏳ JUnit Testing
-- ⏳ JavaFX/Swing GUI
-- ⏳ REST API using Spring Boot
+- ⏳ Java Streams API
 
 | Day | Progress |
 |------|----------|
@@ -158,7 +154,8 @@ src/
 | 12 | Input Validation & Dummy Data Generator |
 | 13 | InputHelper Utility Class & Refactoring |
 | 14 | Packages, Validator & Custom Exceptions |
-| 15 | File Handling & Data Persistence |
+| 15 | File Handling (Save & Load Students) |
+| 16 | Repository Pattern & Layered Architecture |
 
 ---
 
