@@ -24,6 +24,10 @@ This project is developed incrementally as part of **Project Titan**, where ever
 - ✅ Validator Utility
 - ✅ Repository Layer
 - ✅ Modular Package Structure
+- ✅ Repository Pattern
+- ✅ Repository Interface
+- ✅ In-Memory Repository
+- ✅ Manual Dependency Injection
 
 ---
 ### Software Engineering
@@ -36,6 +40,20 @@ This project is developed incrementally as part of **Project Titan**, where ever
 - Clean Architecture
 - File Handling
 - Data Persistence
+
+### Software Engineering
+
+- Separation of Concerns
+- Package Organization
+- Utility Classes
+- Validation Layer
+- Custom Exceptions
+- Clean Architecture
+- Repository Pattern
+- Interface-based Design
+- Dependency Injection (Manual)
+- Loose Coupling
+- Dependency Inversion Principle (DIP)
 
 ## 🛠 Technologies
 
@@ -140,12 +158,12 @@ src/
 
 ## 🎯 Future Improvements
 
-- ⏳ Improve Repository Encapsulation
-- ⏳ Remove direct `getStudents()` usage from Service
-- ⏳ Refactor Sorting Operations into Repository
+- ⏳ Strategy Pattern (Sorting Strategies)
+- ⏳ File Repository Implementation
 - ⏳ Logging
 - ⏳ JUnit Testing
 - ⏳ Java Streams API
+- ⏳ Generics
 
 | Day | Progress |
 |------|----------|
@@ -156,6 +174,7 @@ src/
 | 14 | Packages, Validator & Custom Exceptions |
 | 15 | File Handling (Save & Load Students) |
 | 16 | Repository Pattern & Layered Architecture |
+
 
 ---
 

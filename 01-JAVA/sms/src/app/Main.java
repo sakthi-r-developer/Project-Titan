@@ -3,6 +3,8 @@ package app;
 import Validation.Validator;
 import exceptions.*;
 import model.Student;
+import repository.InMemoryStudentRepository;
+import repository.StudentRepository;
 import service.StudentService;
 import util.InputHelper;
 
@@ -19,13 +21,14 @@ class Main {
 
 
         public static void main(String[] args) throws StudentNotFoundException, InvalidChoiceException, IOException {
-            StudentService studentService = new StudentService();
+            StudentRepository repository = new InMemoryStudentRepository();
+            StudentService studentService = new StudentService(repository);
             Scanner sc = new Scanner(System.in);
-            StudentService.setStudents(loadStudents());
+            studentService.loadStudents();
             while (true) {
                 int option = InputHelper.readMenuChoice(sc);
                 if(option==10) {
-                    saveStudents(StudentService.getStudents());
+                    studentService.saveStudents();
                     break;
                 }
                 switch (option) {
@@ -79,7 +82,7 @@ class Main {
                         int searchId = InputHelper.readInt(sc,"Enter Student ID:");
                         sc.nextLine();
                         try{
-                            Student searchStudent = StudentService.searchStudent(searchId);
+                            Student searchStudent = studentService.searchStudent(searchId);
                             System.out.println(searchStudent);
                             System.out.println("Student found successfully");
                         }

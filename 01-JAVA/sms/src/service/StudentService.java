@@ -4,10 +4,9 @@ import Validation.Validator;
 import exceptions.InvalidStudentException;
 import exceptions.StudentNotFoundException;
 import model.Student;
+import repository.InMemoryStudentRepository;
 import repository.StudentRepository;
-
-import java.util.ArrayList;
-import java.util.Comparator;
+import util.FileHandler;
 
 //import static repository.StudentRepository.students;
 
@@ -15,21 +14,21 @@ import java.util.Comparator;
 
 public class StudentService{
 //    private static ArrayList<Student> students;
-static StudentRepository studentRepository;
+    private StudentRepository repository;
 //    private static ArrayList<Student> students;
-    public StudentService() {
-        studentRepository = new StudentRepository();
+    public StudentService(StudentRepository repository) {
+        this.repository = repository;
     }
-    public static ArrayList<Student> getStudents(){
-        return studentRepository.getStudents();
+    public void loadStudents(){
+        repository.setStudents(FileHandler.loadStudents());
     }
-    public static void setStudents(ArrayList<Student> students){
-        StudentRepository.setStudents(students);
+    public void saveStudents(){
+        FileHandler.saveStudents(repository.getStudents());
     }
 
     public void addDummyStudents() throws InvalidStudentException{
 
-        if(!studentRepository.getStudents().isEmpty()) {
+        if(!repository.isStudentsEmpty()) {
             System.out.println("Dummy students already loaded");
             return;
         }
@@ -47,50 +46,37 @@ static StudentRepository studentRepository;
     }
 
     public void addStudent(Student student) throws InvalidStudentException{
-        studentRepository.addStudent(student);
+        repository.addStudent(student);
 
     }
     public void viewStudents() {
-        for (Student student : studentRepository.getStudents()) {
-            System.out.println(student);
+        for (int i = 0; i < repository.size(); i++) {
+            System.out.println(repository.get(i));
         }
     }
-    public static boolean studentExists(int id) {
-//        for (Student student : students) {
-//            if (student.getId() == id) {
-//                return true;
-//            }
-//        }
-//        return false;
-        return studentRepository.studentExists(id);
+    public boolean studentExists(int id) {
+        return repository.studentExists(id);
     }
 
-    public static Student searchStudent(int searchId) throws StudentNotFoundException {
-//        int count=0;
-//        for (Student student: students) {
-//            count++;
-//            if(student.getId() == searchId) {
-//                System.out.println(count+" Comparisons");
-//                return student;
-//            }
-//        }
-//        throw new StudentNotFoundException("Student not found");
-        return studentRepository.searchStudent(searchId);
-//      return null;
+    public Student searchStudent(int searchId) throws StudentNotFoundException {
+
+        return repository.searchStudent(searchId);
+
 
     }
     public Student binarySearchStudent(int searchId) {
+        int n= repository.size();
         int start=0;
-        int end=studentRepository.getStudents().size()-1;
+        int end=n-1;
         int count=0;
         while(start<=end) {
             int mid=start+(end-start)/2;
             count++;
-            if(searchId==studentRepository.getStudents().get(mid).getId()) {
+            if(searchId== repository.get(mid).getId()) {
                 System.out.println(count+" comparisons");
-                return studentRepository.getStudents().get(mid);
+                return repository.get(mid);
             }
-            else if(searchId<studentRepository.getStudents().get(mid).getId()) {
+            else if(searchId< repository.get(mid).getId()) {
                 end=mid-1;
             }
             else {
@@ -102,7 +88,7 @@ static StudentRepository studentRepository;
     }
     public void deleteStudent( int deleteId) throws StudentNotFoundException {
 //        Student student = searchStudent(deleteId);
-        studentRepository.deleteStudent(deleteId);
+        repository.deleteStudent(deleteId);
     }
 
     public boolean updateStudent(int updateId,int choice,String value) throws StudentNotFoundException {
@@ -135,7 +121,7 @@ static StudentRepository studentRepository;
 
     }
     public void selectionSortStudents(){
-        int n =studentRepository.getStudents().size();
+        int n = repository.size();
         for(int i=0;i<n-1;i++){
             int last=n-i-1;
             int max=getMax(0,last);
@@ -146,7 +132,7 @@ static StudentRepository studentRepository;
     private int getMax(int start,int end){
         int max=start;
         for(int i=start;i<=end;i++){
-            if(studentRepository.getStudents().get(i).getId()>studentRepository.getStudents().get(max).getId()){
+            if(repository.get(i).getId()> repository.get(max).getId()){
                 max=i;
             }
 //            max=Math.max(max,(students.get(i)).getId());
@@ -154,23 +140,19 @@ static StudentRepository studentRepository;
         return max;
     }
     private void swap(int a,int b){
-        Student temp = studentRepository.getStudents().get(a);
-        studentRepository.getStudents().set(a, studentRepository.getStudents().get(b));
-        studentRepository.getStudents().set(b, temp);
+        Student temp = repository.get(a);
+        repository.set(a, repository.get(b));
+        repository.set(b, temp);
     }
     public void bubbleSortStudents() {
-        int n = studentRepository.getStudents().size();
-        Student temp;
+        int n = repository.size();
         for (int i = 0; i < n - 1; i++) {
             boolean swapped = false;
 
             for (int j = 0; j < n - 1 - i; j++) {
-                if ((studentRepository.getStudents().get(j)).getId() > (studentRepository.getStudents().get(j + 1)).getId()) {
+                if ((repository.get(j)).getId() > (repository.get(j + 1)).getId()) {
 
-                    // Swap
-                    temp = studentRepository.getStudents().get(j);
-                    studentRepository.getStudents().set(j, studentRepository.getStudents().get(j + 1));
-                    studentRepository.getStudents().set(j + 1, temp);
+                    swap(j,j+1);
 
                     swapped = true;
                 }
@@ -184,13 +166,12 @@ static StudentRepository studentRepository;
     }
 
     public void sortStudentsById() {
-        studentRepository.getStudents().sort(Comparator.comparing(Student::getId));
-
+        repository.sortById();
     }
 
     public boolean isStudentsEmpty() {
 //        return students.isEmpty();
-        return studentRepository.isStudentsEmpty();
+        return repository.isStudentsEmpty();
     }
 
 }
