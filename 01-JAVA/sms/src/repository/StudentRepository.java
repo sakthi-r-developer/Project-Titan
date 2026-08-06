@@ -30,5 +30,4 @@ public interface StudentRepository {
 
     void swap(int index1, int index2);
 
-    void sortById();
 }

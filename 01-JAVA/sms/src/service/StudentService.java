@@ -6,6 +6,9 @@ import exceptions.StudentNotFoundException;
 import model.Student;
 import repository.InMemoryStudentRepository;
 import repository.StudentRepository;
+import sorting.BubbleSortStrategy;
+import sorting.SelectionSortStrategy;
+import sorting.SortingStrategy;
 import util.FileHandler;
 
 //import static repository.StudentRepository.students;
@@ -15,6 +18,7 @@ import util.FileHandler;
 public class StudentService{
 //    private static ArrayList<Student> students;
     private StudentRepository repository;
+    private SortingStrategy sortingStrategy;
 //    private static ArrayList<Student> students;
     public StudentService(StudentRepository repository) {
         this.repository = repository;
@@ -121,52 +125,23 @@ public class StudentService{
 
     }
     public void selectionSortStudents(){
-        int n = repository.size();
-        for(int i=0;i<n-1;i++){
-            int last=n-i-1;
-            int max=getMax(0,last);
-            swap(max,last);
-        }
+        sortingStrategy = new SelectionSortStrategy();
+        sortingStrategy.sort(repository.getStudents());
         viewStudents();
     }
-    private int getMax(int start,int end){
-        int max=start;
-        for(int i=start;i<=end;i++){
-            if(repository.get(i).getId()> repository.get(max).getId()){
-                max=i;
-            }
-//            max=Math.max(max,(students.get(i)).getId());
-        }
-        return max;
-    }
-    private void swap(int a,int b){
-        Student temp = repository.get(a);
-        repository.set(a, repository.get(b));
-        repository.set(b, temp);
-    }
+
+
     public void bubbleSortStudents() {
-        int n = repository.size();
-        for (int i = 0; i < n - 1; i++) {
-            boolean swapped = false;
-
-            for (int j = 0; j < n - 1 - i; j++) {
-                if ((repository.get(j)).getId() > (repository.get(j + 1)).getId()) {
-
-                    swap(j,j+1);
-
-                    swapped = true;
-                }
-            }
-
-            // Already sorted
-            if (!swapped) break;
-        }
-
+        sortingStrategy = new BubbleSortStrategy();
+        sortingStrategy.sort(repository.getStudents());
+        viewStudents();
 
     }
 
     public void sortStudentsById() {
-        repository.sortById();
+
+        sortingStrategy = new SelectionSortStrategy();
+        sortingStrategy.sort(repository.getStudents());
     }
 
     public boolean isStudentsEmpty() {

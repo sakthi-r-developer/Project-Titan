@@ -28,6 +28,11 @@ This project is developed incrementally as part of **Project Titan**, where ever
 - ✅ Repository Interface
 - ✅ In-Memory Repository
 - ✅ Manual Dependency Injection
+- ✅ Strategy Pattern
+- ✅ Bubble Sort Strategy
+- ✅ Selection Sort Strategy
+- ✅ Built-in Sort Strategy
+- ✅ Pluggable Sorting Algorithms
 
 ---
 ### Software Engineering

@@ -37,9 +37,7 @@ public class InMemoryStudentRepository implements StudentRepository {
         students.set(index1, students.get(index2));
         students.set(index2, temp);
     }
-    public void sortById(){
-        students.sort(Comparator.comparing(Student::getId));
-    }
+
     public void addStudent(Student student) throws InvalidStudentException{
 
         students.add(student);
