@@ -5,7 +5,12 @@ import exceptions.*;
 import model.Student;
 import repository.InMemoryStudentRepository;
 import repository.StudentRepository;
+import searching.BinarySearchStrategy;
+import searching.LinearSearchStrategy;
 import service.StudentService;
+import sorting.BubbleSortStrategy;
+import sorting.BuiltInSortStrategy;
+import sorting.SelectionSortStrategy;
 import util.InputHelper;
 
 import java.io.IOException;
@@ -53,7 +58,7 @@ class Main {
                         Student student = new Student(id, name, age, department);
 
                         try{
-                            Validator.validateStudent(student);
+                            Validator.validateStudent(student,studentService);
                             studentService.addStudent(student);
                             System.out.println("Add Student Successful");
                         }
@@ -82,7 +87,11 @@ class Main {
                         int searchId = InputHelper.readInt(sc,"Enter Student ID:");
                         sc.nextLine();
                         try{
-                            Student searchStudent = studentService.searchStudent(searchId);
+                            Student searchStudent =
+                                    studentService.searchStudent(
+                                            new LinearSearchStrategy(),
+                                            searchId
+                                    );
                             System.out.println(searchStudent);
                             System.out.println("Student found successfully");
                         }
@@ -137,7 +146,7 @@ class Main {
 
                         }
                         else {
-                            studentService.sortStudentsById();
+                            studentService.SortStudents(new BuiltInSortStrategy());
                             studentService.viewStudents();
                             System.out.println("Student sorted successfully");
                         }
@@ -147,7 +156,7 @@ class Main {
                             System.out.println("no students found");
                         }
                         else {
-                            studentService.bubbleSortStudents();
+                            studentService.SortStudents(new BubbleSortStrategy());
                             studentService.viewStudents();
                             System.out.println("Student sorted successfully");
                         }
@@ -158,7 +167,7 @@ class Main {
 
                         }
                         else {
-                            studentService.selectionSortStudents();
+                            studentService.SortStudents(new SelectionSortStrategy());
                             System.out.println("Student sorted successfully");
                         }
                         break;
@@ -169,7 +178,11 @@ class Main {
                         else{
                             int binarySearchId = InputHelper.readInt(sc,"Enter searchId :");
                             sc.nextLine();
-                            Student foundBSStudent=studentService.binarySearchStudent( binarySearchId);
+                            Student foundBSStudent=
+                                    studentService.searchStudent(
+                                            new BinarySearchStrategy(),
+                                            binarySearchId
+                                    );
                             if(foundBSStudent!=null) {
                                 System.out.println(foundBSStudent);
                             }

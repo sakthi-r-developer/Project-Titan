@@ -1,1 +1,10 @@
-101,sakthi,19,it
+101,Sakthi,19,IT
+102,Arun,20,CSE
+103,Vijay,18,ECE
+104,Karthik,21,EEE
+105,Rahul,19,MECH
+106,Ajay,20,IT
+107,Surya,18,CSE
+108,Praveen,22,ECE
+109,Manoj,19,EEE
+110,Hari,20,MECH

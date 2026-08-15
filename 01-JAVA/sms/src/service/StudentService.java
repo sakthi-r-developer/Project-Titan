@@ -4,22 +4,14 @@ import Validation.Validator;
 import exceptions.InvalidStudentException;
 import exceptions.StudentNotFoundException;
 import model.Student;
-import repository.InMemoryStudentRepository;
 import repository.StudentRepository;
-import sorting.BubbleSortStrategy;
-import sorting.SelectionSortStrategy;
+import searching.LinearSearchStrategy;
+import searching.SearchStrategy;
 import sorting.SortingStrategy;
 import util.FileHandler;
 
-//import static repository.StudentRepository.students;
-
-//import static repository.StudentRepository.students;
-
 public class StudentService{
-//    private static ArrayList<Student> students;
     private StudentRepository repository;
-    private SortingStrategy sortingStrategy;
-//    private static ArrayList<Student> students;
     public StudentService(StudentRepository repository) {
         this.repository = repository;
     }
@@ -31,12 +23,10 @@ public class StudentService{
     }
 
     public void addDummyStudents() throws InvalidStudentException{
-
         if(!repository.isStudentsEmpty()) {
             System.out.println("Dummy students already loaded");
             return;
         }
-
         addStudent(new Student(101, "Sakthi", 19, "IT"));
         addStudent(new Student(102, "Arun", 20, "CSE"));
         addStudent(new Student(103, "Vijay", 18, "ECE"));
@@ -48,7 +38,6 @@ public class StudentService{
         addStudent(new Student(109, "Manoj", 19, "EEE"));
         addStudent(new Student(110, "Hari", 20, "MECH"));
     }
-
     public void addStudent(Student student) throws InvalidStudentException{
         repository.addStudent(student);
 
@@ -61,42 +50,19 @@ public class StudentService{
     public boolean studentExists(int id) {
         return repository.studentExists(id);
     }
-
-    public Student searchStudent(int searchId) throws StudentNotFoundException {
-
-        return repository.searchStudent(searchId);
-
-
-    }
-    public Student binarySearchStudent(int searchId) {
-        int n= repository.size();
-        int start=0;
-        int end=n-1;
-        int count=0;
-        while(start<=end) {
-            int mid=start+(end-start)/2;
-            count++;
-            if(searchId== repository.get(mid).getId()) {
-                System.out.println(count+" comparisons");
-                return repository.get(mid);
-            }
-            else if(searchId< repository.get(mid).getId()) {
-                end=mid-1;
-            }
-            else {
-                start=mid+1;
-            }
+    public Student searchStudent(SearchStrategy strategy, int id)
+            throws StudentNotFoundException {
+        Student student = strategy.search(repository.getStudents(), id);
+        if (student == null) {
+            throw new StudentNotFoundException("Student not found");
         }
-
-        return null;
+        return student;
     }
     public void deleteStudent( int deleteId) throws StudentNotFoundException {
-//        Student student = searchStudent(deleteId);
         repository.deleteStudent(deleteId);
     }
-
     public boolean updateStudent(int updateId,int choice,String value) throws StudentNotFoundException {
-        Student studentToUpdate = searchStudent(updateId);
+        Student studentToUpdate = searchStudent(new LinearSearchStrategy(), updateId);
         boolean result = false;
         switch (choice) {
             case 1:
@@ -124,28 +90,11 @@ public class StudentService{
         return result;
 
     }
-    public void selectionSortStudents(){
-        sortingStrategy = new SelectionSortStrategy();
+    public void SortStudents(SortingStrategy sortingStrategy) {
         sortingStrategy.sort(repository.getStudents());
         viewStudents();
     }
-
-
-    public void bubbleSortStudents() {
-        sortingStrategy = new BubbleSortStrategy();
-        sortingStrategy.sort(repository.getStudents());
-        viewStudents();
-
-    }
-
-    public void sortStudentsById() {
-
-        sortingStrategy = new SelectionSortStrategy();
-        sortingStrategy.sort(repository.getStudents());
-    }
-
     public boolean isStudentsEmpty() {
-//        return students.isEmpty();
         return repository.isStudentsEmpty();
     }
 

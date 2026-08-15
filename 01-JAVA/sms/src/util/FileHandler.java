@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 
 public class FileHandler {
+//    private static final String FILE_PATH = "data/students.txt";
     public static void saveStudents(ArrayList<Student> students){
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("students.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/students.txt"))) {
 
             for(Student student : students){
                 bw.write(student.getId() + "," +
@@ -28,7 +29,7 @@ public class FileHandler {
     public static ArrayList<Student> loadStudents(){
         ArrayList<Student> students = new ArrayList<>();
 
-        File file = new File("students.txt");
+        File file = new File("src/data/students.txt");
 
         if(!file.exists()){
             return students;

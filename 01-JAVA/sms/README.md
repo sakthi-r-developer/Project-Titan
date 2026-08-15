@@ -18,130 +18,92 @@ This project is developed incrementally as part of **Project Titan**, where ever
 - ✅ Duplicate ID Validation
 - ✅ Manual Bubble Sort
 - ✅ Manual Selection Sort
+- ✅ Built-in Sorting
+- ✅ Linear Search
 - ✅ Binary Search
-- ✅ File Save & Load (TXT)
 - ✅ Custom Exception Handling
 - ✅ Validator Utility
-- ✅ Repository Layer
+- ✅ InputHelper Utility
 - ✅ Modular Package Structure
 - ✅ Repository Pattern
-- ✅ Repository Interface
 - ✅ In-Memory Repository
-- ✅ Manual Dependency Injection
-- ✅ Strategy Pattern
-- ✅ Bubble Sort Strategy
-- ✅ Selection Sort Strategy
-- ✅ Built-in Sort Strategy
-- ✅ Pluggable Sorting Algorithms
-
----
-### Software Engineering
-
-- Separation of Concerns
-- Package Organization
-- Utility Classes
-- Validation Layer
-- Custom Exceptions
-- Clean Architecture
-- File Handling
-- Data Persistence
-
-### Software Engineering
-
-- Separation of Concerns
-- Package Organization
-- Utility Classes
-- Validation Layer
-- Custom Exceptions
-- Clean Architecture
-- Repository Pattern
-- Interface-based Design
-- Dependency Injection (Manual)
-- Loose Coupling
-- Dependency Inversion Principle (DIP)
-
-## 🛠 Technologies
-
-- Java
-- Object-Oriented Programming (OOP)
-- ArrayList
-- Scanner
-- Exception Handling
-- Git & GitHub
+- ✅ Dependency Injection
+- ✅ Strategy Pattern for Sorting
+- ✅ Strategy Pattern for Searching
+- ✅ File-based Student Persistence
 
 ---
 
-## 📂 Project Structure
-
-src/
-│
-├── app/
-│   └── Main.java
-│
-├── model/
-│   └── Student.java
-│
-├── service/
-│   └── StudentService.java
-│
-├── util/
-│   └── InputHelper.java
-│
-├── validation/
-│   └── Validator.java
-│
-├── exceptions/
-│   ├── DuplicateStudentException.java
-│   ├── InvalidAgeException.java
-│   ├── InvalidChoiceException.java
-│   ├── InvalidStudentException.java
-│   └── StudentNotFoundException.java
-│
-└── (Future)
-    ├── repository/
-    │   └── StudentRepository.java
-    │
-    ├── storage/
-    │   ├── FileStorage.java
-    │   └── StudentDatabase.java
-    │
-    └── exceptions/
-        └── StudentException.java
-
----
 ## 📚 Concepts Practiced
 
-### Java
+### Core Java
 
-- Classes & Objects
-- Constructors
+- Classes and Objects
+- OOP
 - Encapsulation
-- Getters & Setters
-- Instance Methods
-- Method Extraction
-- Object References
-- Exception Handling
-- try-catch
-
-### OOP
-
-- Separation of Concerns
-- Service Layer Design
-- Data Validation
-- Code Refactoring
+- ArrayList
+- Methods
+- Constructors
+- Static vs Instance Members
+- Interfaces
+- Polymorphism
+- Abstraction
+- Generics
 
 ### Data Structures & Algorithms
 
 - ArrayList
 - Linear Search
 - Binary Search
-- Manual Bubble Sort
-- Manual Selection Sort
-- Object Swapping
-- Time & Space Complexity
+- Bubble Sort
+- Selection Sort
+- Java Built-in Sorting
+- Comparator
+- Algorithm complexity
+
+### Exception Handling
+
+- Custom Exceptions
+- `throw`
+- `throws`
+- `try-catch`
+- Exception-based validation
+
+### Software Engineering
+
+- Separation of Concerns
+- Single Responsibility Principle
+- Open/Closed Principle
+- Package Organization
+- Utility Classes
+- Validation Layer
+- Repository Pattern
+- Strategy Pattern
+- Dependency Injection
+- Programming to an Interface
+- Algorithm Encapsulation
 
 ---
 
+## 🏗️ Project Architecture
+
+The project follows a layered architecture:
+
+```text
+Main
+ │
+ ▼
+StudentService
+ │
+ ▼
+StudentRepository
+ │
+ ▼
+InMemoryStudentRepository
+ │
+ ▼
+ArrayList<Student>
+---
 ## 🚀 Development Timeline
 
 | Day | Progress |

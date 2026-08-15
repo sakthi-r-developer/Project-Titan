@@ -5,6 +5,10 @@ import model.Student;
 import service.StudentService;
 
 public class Validator {
+//    StudentService studentService;
+//    public Validator(StudentService studentService) {
+//        this.studentService = studentService;
+//    }
     public static boolean isValidAge(String value){
         int age=Integer.parseInt(value);
         if(age<16 || age>100) {
@@ -29,12 +33,11 @@ public class Validator {
             throw new InvalidChoiceException("Invalid Choice");
         }
     }
-    public static void validateStudent(Student student) throws InvalidStudentException, StudentNotFoundException, InvalidAgeException, DuplicateStudentException {
+    public static void validateStudent(Student student,StudentService studentService) throws InvalidStudentException, StudentNotFoundException, InvalidAgeException, DuplicateStudentException {
         if (student.getId() <= 0) {
             throw new InvalidStudentException("Student ID must be greater than 0.");
         }
-
-        if (StudentService.studentExists(student.getId())) {
+        if (studentService.studentExists(student.getId())) {
             throw new DuplicateStudentException("Student already exists.");
         }
 
