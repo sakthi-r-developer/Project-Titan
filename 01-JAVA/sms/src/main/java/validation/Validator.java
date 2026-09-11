@@ -1,4 +1,4 @@
-package Validation;
+package validation;
 
 import exceptions.*;
 import model.Student;

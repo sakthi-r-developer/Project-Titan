@@ -25,7 +25,7 @@ class Main {
         // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
-        public static void main(String[] args) throws StudentNotFoundException, InvalidChoiceException, IOException {
+        public static void main(String[] args) throws StudentNotFoundException, InvalidChoiceException, IOException, InvalidStudentException {
             StudentRepository repository = new InMemoryStudentRepository();
             StudentService studentService = new StudentService(repository);
             Scanner sc = new Scanner(System.in);
@@ -39,8 +39,11 @@ class Main {
                 switch (option) {
                     case 0:
                         try {
-                            studentService.addDummyStudents();
-                            System.out.println("Add Student Successful");
+                            if (studentService.addDummyStudents()) {
+                                System.out.println("Add Student Successful");
+                            } else {
+                                System.out.println("Dummy students already loaded");
+                            }
                         }
                         catch (InvalidStudentException e) {
                             System.out.println(e.getMessage());
@@ -58,7 +61,7 @@ class Main {
                         Student student = new Student(id, name, age, department);
 
                         try{
-                            Validator.validateStudent(student,studentService);
+//                            Validator.validateStudent(student,studentService);
                             studentService.addStudent(student);
                             System.out.println("Add Student Successful");
                         }
@@ -79,7 +82,9 @@ class Main {
 
                         }
                         else {
-                            studentService.viewStudents();
+                            for (Student s : studentService.getStudents()) {
+                                System.out.println(s);
+                            }
                             System.out.println("Student view successfully");
                         }
                         break;
@@ -133,11 +138,26 @@ class Main {
                         }
                         sc.nextLine();
                         String value=InputHelper.readString(sc,"Enter New Value :");
-                        if(studentService.updateStudent(updateId,choice,value)){
+//                        try {
+//                            if (studentService.updateStudent(updateId, choice, value)) {
+//                                System.out.println("Student updated successfully");
+//                            }
+//                        }
+//                        catch (StudentNotFoundException | InvalidStudentException e) {
+//                            System.out.println(e.getMessage());
+//                        }
+                        boolean updated = studentService.updateStudent(updateId, choice, value);
+
+                        if (updated) {
                             System.out.println("Student updated successfully");
                         }
-                        else{
-                            System.out.println("Student not updated successfully");
+                        else {
+                            if (choice == 2) {
+                                System.out.println("Enter according datatype ..");
+                            }
+                            else {
+                                System.out.println("Invalid input");
+                            }
                         }
                         break;
                     case 6:
@@ -146,8 +166,10 @@ class Main {
 
                         }
                         else {
-                            studentService.SortStudents(new BuiltInSortStrategy());
-                            studentService.viewStudents();
+                            studentService.sortStudents(new BuiltInSortStrategy());
+                            for (Student s : studentService.getStudents()) {
+                                System.out.println(s);
+                            }
                             System.out.println("Student sorted successfully");
                         }
                         break;
@@ -156,8 +178,10 @@ class Main {
                             System.out.println("no students found");
                         }
                         else {
-                            studentService.SortStudents(new BubbleSortStrategy());
-                            studentService.viewStudents();
+                            studentService.sortStudents(new BubbleSortStrategy());
+                            for (Student s : studentService.getStudents()) {
+                                System.out.println(s);
+                            }
                             System.out.println("Student sorted successfully");
                         }
                         break;
@@ -167,7 +191,7 @@ class Main {
 
                         }
                         else {
-                            studentService.SortStudents(new SelectionSortStrategy());
+                            studentService.sortStudents(new SelectionSortStrategy());
                             System.out.println("Student sorted successfully");
                         }
                         break;

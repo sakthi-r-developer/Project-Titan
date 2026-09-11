@@ -1,6 +1,6 @@
 package service;
 
-import Validation.Validator;
+import validation.Validator;
 import exceptions.DuplicateStudentException;
 import exceptions.InvalidAgeException;
 import exceptions.InvalidStudentException;
@@ -11,8 +11,8 @@ import searching.LinearSearchStrategy;
 import searching.SearchStrategy;
 import sorting.SortingStrategy;
 import util.FileHandler;
-import exceptions.DuplicateStudentException;
-import exceptions.InvalidAgeException;
+import java.util.ArrayList;
+
 
 public class StudentService{
     private StudentRepository repository;
@@ -26,10 +26,9 @@ public class StudentService{
         FileHandler.saveStudents(repository.getStudents());
     }
 
-    public void addDummyStudents() throws InvalidStudentException{
+    public boolean addDummyStudents() throws InvalidStudentException{
         if(!repository.isStudentsEmpty()) {
-            System.out.println("Dummy students already loaded");
-            return;
+            return false;
         }
         addStudent(new Student(101, "Sakthi", 19, "IT"));
         addStudent(new Student(102, "Arun", 20, "CSE"));
@@ -41,6 +40,7 @@ public class StudentService{
         addStudent(new Student(108, "Praveen", 22, "ECE"));
         addStudent(new Student(109, "Manoj", 19, "EEE"));
         addStudent(new Student(110, "Hari", 20, "MECH"));
+        return true;
     }
     public void addStudent(Student student)
             throws InvalidStudentException,
@@ -50,10 +50,13 @@ public class StudentService{
         Validator.validateStudent(student, this);
         repository.addStudent(student);
     }
-    public void viewStudents() {
-        for (int i = 0; i < repository.size(); i++) {
-            System.out.println(repository.get(i));
-        }
+//    public void viewStudents() {
+//        for (int i = 0; i < repository.size(); i++) {
+//            System.out.println(repository.get(i));
+//        }
+//    }
+    public ArrayList<Student> getStudents() {
+        return repository.getStudents();
     }
     public boolean studentExists(int id) {
         return repository.studentExists(id);
@@ -69,38 +72,31 @@ public class StudentService{
     public void deleteStudent( int deleteId) throws StudentNotFoundException {
         repository.deleteStudent(deleteId);
     }
-    public boolean updateStudent(int updateId,int choice,String value) throws StudentNotFoundException {
+    public boolean updateStudent(int updateId,int choice,String value) throws StudentNotFoundException,InvalidStudentException {
         Student studentToUpdate = searchStudent(new LinearSearchStrategy(), updateId);
-        boolean result = false;
         switch (choice) {
             case 1:
                 studentToUpdate.setName(value);
-                result = true;
-                break;
+                return true;
             case 2:
                 if(Validator.isNumeric(value) && Validator.isValidAge(value)) {
                     studentToUpdate.setAge(Integer.parseInt(value));
-                    result = true;
+                    return true;
                 }
-                else{
-                    System.out.println("Enter according datatype ..");
-                }
-                break;
+                return false;
+//                throw new InvalidAgeException("Enter according datatype ..");
             case 3:
                 studentToUpdate.setDepartment(value);
-                result = true;
-                break;
+                return true;
             default:
-                System.out.println("Invalid input");
-                result = false;
-                break;
+//                throw new InvalidStudentException("Invalid input");
+                return false;
         }
-        return result;
+
 
     }
-    public void SortStudents(SortingStrategy sortingStrategy) {
+    public void sortStudents(SortingStrategy sortingStrategy) {
         sortingStrategy.sort(repository.getStudents());
-        viewStudents();
     }
     public boolean isStudentsEmpty() {
         return repository.isStudentsEmpty();

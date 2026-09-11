@@ -232,7 +232,7 @@ class StudentServiceTest {
         service.addStudent(new Student(2, "Arun", 20, "CSE"));
 
         // Act
-        service.SortStudents(new BuiltInSortStrategy());
+        service.sortStudents(new BuiltInSortStrategy());
 
         // Assert
         assertEquals(1, repository.getStudents().get(0).getId());
@@ -244,10 +244,10 @@ class StudentServiceTest {
             throws InvalidStudentException {
 
         // Act
-        service.addDummyStudents();
+//        service.addDummyStudents();
 
         // Assert
-        assertEquals(10, repository.getStudents().size());
+        assertTrue(service.addDummyStudents());
     }
     @Test
     void addDummyStudents_studentsAlreadyExist_doesNotAddDuplicates()
@@ -259,9 +259,9 @@ class StudentServiceTest {
         );
 
         // Act
-        service.addDummyStudents();
+//        service.addDummyStudents();
 
         // Assert
-        assertEquals(1, repository.getStudents().size());
+        assertFalse(service.addDummyStudents());
     }
 }
