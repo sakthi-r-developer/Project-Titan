@@ -5,10 +5,7 @@ import model.Student;
 import service.StudentService;
 
 public class Validator {
-//    StudentService studentService;
-//    public Validator(StudentService studentService) {
-//        this.studentService = studentService;
-//    }
+
     public static boolean isValidAge(String value){
         int age=Integer.parseInt(value);
         if(age<16 || age>100) {

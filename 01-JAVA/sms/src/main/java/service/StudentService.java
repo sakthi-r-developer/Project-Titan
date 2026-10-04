@@ -72,28 +72,38 @@ public class StudentService{
     public void deleteStudent( int deleteId) throws StudentNotFoundException {
         repository.deleteStudent(deleteId);
     }
-    public boolean updateStudent(int updateId,int choice,String value) throws StudentNotFoundException,InvalidStudentException {
-        Student studentToUpdate = searchStudent(new LinearSearchStrategy(), updateId);
+    public void updateStudent(int updateId, int choice, String value)
+            throws StudentNotFoundException,
+            InvalidStudentException{
+
+        Student studentToUpdate =
+                searchStudent(new LinearSearchStrategy(), updateId);
+
         switch (choice) {
+
             case 1:
                 studentToUpdate.setName(value);
-                return true;
+                break;
+
             case 2:
-                if(Validator.isNumeric(value) && Validator.isValidAge(value)) {
-                    studentToUpdate.setAge(Integer.parseInt(value));
-                    return true;
+                if (!Validator.isNumeric(value)) {
+                    throw new InvalidAgeException("Age must be a number");
                 }
-                return false;
-//                throw new InvalidAgeException("Enter according datatype ..");
+
+                if (!Validator.isValidAge(value)) {
+                    throw new InvalidAgeException("Invalid age");
+                }
+
+                studentToUpdate.setAge(Integer.parseInt(value));
+                break;
+
             case 3:
                 studentToUpdate.setDepartment(value);
-                return true;
+                break;
+
             default:
-//                throw new InvalidStudentException("Invalid input");
-                return false;
+                throw new InvalidStudentException("Invalid input");
         }
-
-
     }
     public void sortStudents(SortingStrategy sortingStrategy) {
         sortingStrategy.sort(repository.getStudents());

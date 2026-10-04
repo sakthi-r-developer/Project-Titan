@@ -10,7 +10,7 @@ import repository.InMemoryStudentRepository;
 import repository.StudentRepository;
 import searching.LinearSearchStrategy;
 import sorting.BuiltInSortStrategy;
-import sorting.SortingStrategy;
+import exceptions.InvalidAgeException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -149,12 +149,12 @@ class StudentServiceTest {
         service.addStudent(student);
 
         // Act
-        boolean result = service.updateStudent(1, 1, "Arun");
+        service.updateStudent(1, 1, "Arun");
 
         // Assert
-        assertTrue(result);
         assertEquals("Arun", student.getName());
     }
+
     @Test
     void updateStudent_validId_validAgeUpdated()
             throws InvalidStudentException, StudentNotFoundException {
@@ -164,12 +164,12 @@ class StudentServiceTest {
         service.addStudent(student);
 
         // Act
-        boolean result = service.updateStudent(1, 2, "25");
+        service.updateStudent(1, 2, "25");
 
         // Assert
-        assertTrue(result);
         assertEquals(25, student.getAge());
     }
+
     @Test
     void updateStudent_validId_departmentUpdated()
             throws InvalidStudentException, StudentNotFoundException {
@@ -179,27 +179,30 @@ class StudentServiceTest {
         service.addStudent(student);
 
         // Act
-        boolean result = service.updateStudent(1, 3, "CSE");
+        service.updateStudent(1, 3, "CSE");
 
         // Assert
-        assertTrue(result);
         assertEquals("CSE", student.getDepartment());
     }
+
     @Test
-    void updateStudent_invalidAge_returnsFalse()
+    void updateStudent_invalidAge_throwsException()
             throws InvalidStudentException, StudentNotFoundException {
 
         // Arrange
         Student student = new Student(1, "Shakti", 19, "IT");
         service.addStudent(student);
 
-        // Act
-        boolean result = service.updateStudent(1, 2, "15");
+        // Act + Assert
+        assertThrows(
+                InvalidAgeException.class,
+                () -> service.updateStudent(1, 2, "15")
+        );
 
-        // Assert
-        assertFalse(result);
+        // Verify original value was not changed
         assertEquals(19, student.getAge());
     }
+
     @Test
     void updateStudent_nonExistingId_throwsException() {
 
@@ -208,19 +211,20 @@ class StudentServiceTest {
                 () -> service.updateStudent(999, 1, "Arun")
         );
     }
+
     @Test
-    void updateStudent_invalidChoice_returnsFalse()
+    void updateStudent_invalidChoice_throwsException()
             throws InvalidStudentException, StudentNotFoundException {
 
         // Arrange
         Student student = new Student(1, "Shakti", 19, "IT");
         service.addStudent(student);
 
-        // Act
-        boolean result = service.updateStudent(1, 99, "Something");
-
-        // Assert
-        assertFalse(result);
+        // Act + Assert
+        assertThrows(
+                InvalidStudentException.class,
+                () -> service.updateStudent(1, 99, "Something")
+        );
     }
     @Test
     void sortStudents_sortsById()

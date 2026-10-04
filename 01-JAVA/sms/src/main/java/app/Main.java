@@ -1,7 +1,10 @@
 package app;
 
-import Validation.Validator;
-import exceptions.*;
+import exceptions.DuplicateStudentException;
+import exceptions.InvalidAgeException;
+import exceptions.InvalidChoiceException;
+import exceptions.InvalidStudentException;
+import exceptions.StudentNotFoundException;
 import model.Student;
 import repository.InMemoryStudentRepository;
 import repository.StudentRepository;
@@ -12,20 +15,17 @@ import sorting.BubbleSortStrategy;
 import sorting.BuiltInSortStrategy;
 import sorting.SelectionSortStrategy;
 import util.InputHelper;
-
+import validation.Validator;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static util.FileHandler.loadStudents;
-import static util.FileHandler.saveStudents;
+
 
 
 class Main {
-        //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-        // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
-        public static void main(String[] args) throws StudentNotFoundException, InvalidChoiceException, IOException, InvalidStudentException {
+        static void main(String[] args)  {
             StudentRepository repository = new InMemoryStudentRepository();
             StudentService studentService = new StudentService(repository);
             Scanner sc = new Scanner(System.in);
@@ -61,7 +61,6 @@ class Main {
                         Student student = new Student(id, name, age, department);
 
                         try{
-//                            Validator.validateStudent(student,studentService);
                             studentService.addStudent(student);
                             System.out.println("Add Student Successful");
                         }
@@ -121,43 +120,16 @@ class Main {
 
                         System.out.println("Choose Field: \n  1.Name \n 2.Age \n 3.Department \n");
 
-                        int choice = -1;
-                        while(choice==-1) {
-                            System.out.println("Enter Choice: ");
-                            String choiceStr = sc.next();
-                            try {
-                                if (Validator.isNumeric(choiceStr)) {
-                                    choice = Integer.parseInt(choiceStr);
-                                    if (Validator.isValidChoice(choice))
-                                        System.out.println("Valid Choice.");
-                                }
-                            }
-                            catch (InvalidChoiceException e) {
-                                System.out.println(e.getMessage());
-                            }
-                        }
+
+                        int choice = InputHelper.readUpdateChoice(sc);
                         sc.nextLine();
                         String value=InputHelper.readString(sc,"Enter New Value :");
-//                        try {
-//                            if (studentService.updateStudent(updateId, choice, value)) {
-//                                System.out.println("Student updated successfully");
-//                            }
-//                        }
-//                        catch (StudentNotFoundException | InvalidStudentException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-                        boolean updated = studentService.updateStudent(updateId, choice, value);
-
-                        if (updated) {
+                        try {
+                            studentService.updateStudent(updateId, choice, value);
                             System.out.println("Student updated successfully");
                         }
-                        else {
-                            if (choice == 2) {
-                                System.out.println("Enter according datatype ..");
-                            }
-                            else {
-                                System.out.println("Invalid input");
-                            }
+                        catch (StudentNotFoundException | InvalidStudentException e ) {
+                            System.out.println(e.getMessage());
                         }
                         break;
                     case 6:
@@ -196,22 +168,25 @@ class Main {
                         }
                         break;
                     case 9:
-                        if(studentService.isStudentsEmpty()) {
+                        if (studentService.isStudentsEmpty()) {
                             System.out.println("no students found");
-                        }
-                        else{
-                            int binarySearchId = InputHelper.readInt(sc,"Enter searchId :");
+                        } else {
+                            int binarySearchId =
+                                    InputHelper.readInt(sc, "Enter searchId :");
+
                             sc.nextLine();
-                            Student foundBSStudent=
-                                    studentService.searchStudent(
-                                            new BinarySearchStrategy(),
-                                            binarySearchId
-                                    );
-                            if(foundBSStudent!=null) {
+
+                            try {
+                                Student foundBSStudent =
+                                        studentService.searchStudent(
+                                                new BinarySearchStrategy(),
+                                                binarySearchId
+                                        );
+
                                 System.out.println(foundBSStudent);
-                            }
-                            else{
-                                System.out.println("Student not found");
+
+                            } catch (StudentNotFoundException e) {
+                                System.out.println(e.getMessage());
                             }
                         }
                         break;
