@@ -5,16 +5,13 @@ import exceptions.StudentNotFoundException;
 import model.Student;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+
 
 public class InMemoryStudentRepository implements StudentRepository {
     private ArrayList<Student> students;
     public InMemoryStudentRepository() {
         students = new ArrayList<>();
     }
-//    public static ArrayList<Student> getStudents(){
-//        return students;
-//    }
     public ArrayList<Student> getStudents() {
         return students;
     }
@@ -50,24 +47,21 @@ public class InMemoryStudentRepository implements StudentRepository {
         return false;
     }
 
-    public Student searchStudent(int searchId) throws StudentNotFoundException {
-        int count=0;
-        for (Student student: students) {
-            count++;
-            if(student.getId() == searchId) {
-                System.out.println(count+" Comparisons");
-                return student;
+
+    public void deleteStudent(int id)
+            throws StudentNotFoundException {
+
+        for (int i = 0; i < students.size(); i++) {
+
+            if (students.get(i).getId() == id) {
+                students.remove(i);
+                return;
             }
         }
+
         throw new StudentNotFoundException("Student not found");
-//      return null;
-
     }
 
-    public void deleteStudent( int deleteId) throws StudentNotFoundException {
-        Student student = searchStudent(deleteId);
-        students.remove(student);
-    }
     public boolean isStudentsEmpty() {
         return students.isEmpty();
     }

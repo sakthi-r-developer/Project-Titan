@@ -1,4 +1,4 @@
-# Created at 2026-10-04T17:16:21.124
+# Created at 2026-10-05T23:16:55.093
 Boot Manifest-JAR contains absolute paths in classpath 'S:\Project Titan\01-JAVA\sms\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 'other' has different root

@@ -26,20 +26,21 @@ class InMemoryStudentRepositoryTest {
         assertTrue(repository.studentExists(1));
     }
     @Test
-    void searchStudent_existingId_returnsStudent() throws Exception {
-        Student student = new Student(1, "Shakti", 19, "IT");
-        repository.addStudent(student);
+    void addStudent_multipleStudents_allStudentsAdded() throws Exception {
 
-        Student result = repository.searchStudent(1);
-
-        assertEquals(student, result);
-    }
-    @Test
-    void searchStudent_nonExistingId_throwsException() throws Exception {
-        assertThrows(
-                StudentNotFoundException.class,
-                () -> repository.searchStudent(999)
+        repository.addStudent(
+                new Student(1, "Shakti", 19, "IT")
         );
+
+        repository.addStudent(
+                new Student(2, "Arun", 20, "CSE")
+        );
+
+        repository.addStudent(
+                new Student(3, "Vijay", 18, "ECE")
+        );
+
+        assertEquals(3, repository.size());
     }
     @Test
     void deleteStudent_existingId_studentDeleted() throws Exception {
@@ -57,6 +58,23 @@ class InMemoryStudentRepositoryTest {
                 StudentNotFoundException.class,
                 () -> repository.deleteStudent(999)
         );
+    }
+    @Test
+    void deleteStudent_existingId_sizeDecreases() throws Exception {
+
+        repository.addStudent(
+                new Student(1, "Shakti", 19, "IT")
+        );
+
+        repository.addStudent(
+                new Student(2, "Arun", 20, "CSE")
+        );
+
+        assertEquals(2, repository.size());
+
+        repository.deleteStudent(1);
+
+        assertEquals(1, repository.size());
     }
     @Test
     void studentExists_existingId_returnsTrue() throws Exception {
@@ -81,6 +99,11 @@ class InMemoryStudentRepositoryTest {
         );
 
         assertFalse(repository.isStudentsEmpty());
+    }
+    @Test
+    void size_newRepository_returnsZero() {
+
+        assertEquals(0, repository.size());
     }
     @Test
     void size_afterAddingStudents_returnsCorrectSize() throws Exception {

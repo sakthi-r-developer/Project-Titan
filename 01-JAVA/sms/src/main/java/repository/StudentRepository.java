@@ -14,8 +14,6 @@ public interface StudentRepository {
 
     void addStudent(Student student) throws InvalidStudentException;
 
-    Student searchStudent(int id) throws StudentNotFoundException;
-
     void deleteStudent(int id) throws StudentNotFoundException;
 
     boolean studentExists(int id);

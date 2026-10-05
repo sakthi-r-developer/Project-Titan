@@ -1,0 +1,84 @@
+package LinkedListImplementation;
+
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+
+class LL {
+    public static void main(String[] args) {
+        // System.out.println("Try clicking the Run button.");
+        LLinkedList list = new LLinkedList();
+        list.insertAtFirst(5);
+        list.insertAtFirst(6);
+        list.insertAtFirst(7);
+        list.insertAtLast(4);
+        list.insertAtPos(2,2);
+        list.display();
+    }
+}
+class Node{
+    int data;
+    Node next;
+    public Node(int data){
+        this.data=data;
+    }
+    public Node (int data,Node next){
+        this.data=data;
+        this.next=next;
+    }
+    public String toString(){
+        return this.data+" "+this.next;
+    }
+}
+class LLinkedList{
+    Node head;
+    LLinkedList(){
+
+    }
+    LLinkedList(Node head){
+        this.head=head;
+    }
+    void insertAtFirst(int data){
+        Node newNode=new Node(data);
+        newNode.next=this.head;
+        this.head=newNode;
+    }
+    void insertAtLast(int data){
+
+        Node newNode=new Node(data);
+        if(head == null){
+            head = newNode;
+            return;
+        }
+        Node temp=this.head;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=newNode;
+        newNode.next=null;
+    }
+
+    void insertAtPos(int data,int pos){
+
+        Node newNode=new Node(data);
+        Node temp=this.head;
+        int i=0;
+        while(i+1<pos){
+            temp=temp.next;
+            i++;
+        }
+        newNode.next=temp.next;
+        temp.next=newNode;
+
+
+    }
+
+    void display(){
+        Node temp=this.head;
+        while(temp!=null){
+            System.out.print(temp.data);
+            System.out.print("->");
+            temp=temp.next;
+        }
+        System.out.println("NULL");
+    }
+}
