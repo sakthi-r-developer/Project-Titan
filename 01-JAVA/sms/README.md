@@ -2,7 +2,7 @@
 
 A console-based Student Management System built in Java as part of **Project Titan**.
 
-The project started as a simple Java console application and has been progressively developed using Object-Oriented Programming, validation, custom exceptions, Repository Pattern, Strategy Pattern, Dependency Injection, file persistence, Maven, JUnit 5, and refactoring practices.
+The project started as a simple Java console application and has been progressively developed using Object-Oriented Programming, validation, custom exceptions, service-layer design, Repository Pattern, Strategy Pattern, Dependency Injection, file persistence, Maven, JUnit 5, and continuous refactoring.
 
 ## Features
 
@@ -24,7 +24,7 @@ The project started as a simple Java console application and has been progressiv
 - Search Strategy Pattern
 - Sorting Strategy Pattern
 - Repository Pattern
-- Dependency Injection
+- Constructor Dependency Injection
 - Automated JUnit Testing
 
 ## Technologies
@@ -41,7 +41,7 @@ The project started as a simple Java console application and has been progressiv
 - Strategy Pattern
 - Repository Pattern
 - Dependency Injection
-- IntelliJ IDEA
+- IntelliJ IDEA / VS Code
 - Git & GitHub
 
 ## Project Structure
@@ -56,6 +56,11 @@ sms/
 │   │   │   ├── app/
 │   │   │   │   └── Main.java
 │   │   │   ├── exceptions/
+│   │   │   │   ├── DuplicateStudentException.java
+│   │   │   │   ├── InvalidAgeException.java
+│   │   │   │   ├── InvalidChoiceException.java
+│   │   │   │   ├── InvalidStudentException.java
+│   │   │   │   └── StudentNotFoundException.java
 │   │   │   ├── model/
 │   │   │   │   └── Student.java
 │   │   │   ├── repository/
@@ -91,21 +96,22 @@ sms/
 ## Architecture
 
 ```text
-                    Main
-                     │
-             Console / UI Layer
-                     │
-                     ▼
-              StudentService
-                     │
-              Business Logic
-                     │
-          ┌──────────┴──────────┐
-          ▼                     ▼
-      Repository           Strategies
-          │                ┌─────┴─────┐
-          ▼                ▼           ▼
-     Student Data       Search       Sorting
+                         Main
+                          │
+                  Console / UI Layer
+                          │
+                          ▼
+                   StudentService
+                  /       |        \
+                 /        |         \
+                ▼         ▼          ▼
+          Repository   Search     Sorting
+              │        Strategy   Strategy
+              │          │           │
+              ▼          ▼           ▼
+       Student Data   Linear /    Bubble /
+                      Binary      Selection /
+                                  Built-in
 ```
 
 ### Main
@@ -114,7 +120,7 @@ sms/
 
 It is responsible for reading user actions, calling helpers and services, handling user-facing exceptions, and displaying results.
 
-Repeated workflows were extracted into:
+Repeated workflows are extracted into helper methods such as:
 
 - `addStudent()`
 - `viewStudents()`
@@ -129,13 +135,33 @@ Handles console input and input-level validation, including integer input, strin
 
 ### StudentService
 
-Contains business logic and coordinates validation, repository operations, search strategies, sorting strategies, domain exceptions, and file loading/saving.
+Contains application/business logic and coordinates:
+
+- Validation
+- Repository operations
+- Search strategies
+- Sorting strategies
+- Domain exceptions
+- File loading and saving
 
 The service does not handle console presentation.
 
 ### Repository
 
-`StudentRepository` defines the data-access contract and `InMemoryStudentRepository` provides the current in-memory implementation.
+`StudentRepository` defines the data-access contract and `InMemoryStudentRepository` provides the in-memory implementation.
+
+The Repository is responsible for storing and retrieving student data. It does not contain search algorithms, sorting algorithms, or console output.
+
+Current repository responsibilities include:
+
+- Get and replace the student collection
+- Add a student
+- Delete a student
+- Check whether a student ID exists
+- Check whether the collection is empty
+- Get collection size
+- Get/set a student by index
+- Swap students by index
 
 ### Validation
 
@@ -164,7 +190,7 @@ Implementations:
 - `LinearSearchStrategy`
 - `BinarySearchStrategy`
 
-The same search workflow can use either strategy.
+`StudentService` supplies the repository's student list to the selected strategy. The Repository itself does not implement a search strategy.
 
 ## Sorting Strategy
 
@@ -180,11 +206,11 @@ Implementations:
 - `SelectionSortStrategy`
 - `BuiltInSortStrategy`
 
-The same sorting workflow can use different algorithms.
+`StudentService` supplies the student list to the selected sorting strategy. Sorting is not a Repository responsibility.
 
 ## Repository Pattern
 
-The service depends on the repository interface instead of directly depending on a concrete implementation:
+The service depends on the repository interface instead of directly depending on storage details:
 
 ```java
 StudentRepository repository =
@@ -194,7 +220,7 @@ StudentService studentService =
         new StudentService(repository);
 ```
 
-This provides loose coupling, easier testing, and replaceable storage implementations.
+This provides loose coupling, easier testing, and the ability to replace the storage implementation later.
 
 ## Dependency Injection
 
@@ -222,16 +248,18 @@ File operations are handled by `FileHandler`.
 
 The project uses **JUnit 5** with Maven.
 
+Current test distribution:
+
 | Test Class | Tests |
 |---|---:|
-| `InMemoryStudentRepositoryTest` | 15 |
+| `InMemoryStudentRepositoryTest` | 16 |
 | `StudentServiceTest` | 20 |
-| **Total** | **35** |
+| **Total** | **36** |
 
-Latest result:
+Latest verified Maven result:
 
 ```text
-Tests run: 35
+Tests run: 36
 Failures: 0
 Errors: 0
 Skipped: 0
@@ -239,7 +267,7 @@ Skipped: 0
 BUILD SUCCESS
 ```
 
-Run the test suite with:
+Run the full test suite with:
 
 ```bash
 mvn clean test
@@ -261,20 +289,72 @@ Assert
 Verify the result
 ```
 
-## Maven
+## Day 22 — Main.java Refactoring
 
-Maven is used for:
+Day 22 focused on improving the structure of `Main.java`.
 
-- Dependency management
-- Compilation
-- Test execution
-- Clean builds
-- Standard Java project structure
+Completed:
 
-Main command:
+- Moved update-choice validation into `InputHelper`
+- Removed business-layer console printing
+- Extracted `viewStudents()`
+- Extracted `sortStudents()`
+- Extracted `searchStudent()`
+- Extracted `addStudent()`
+- Extracted `deleteStudent()`
+- Extracted `updateStudent()`
 
-```bash
-mvn clean test
+The refactoring was verified with the project's automated tests.
+
+## Day 23 — Repository Cleanup
+
+Day 23 focused on separating data access from search and sorting algorithms.
+
+Completed:
+
+- Removed `searchStudent()` from `StudentRepository`
+- Removed the Repository's old search implementation
+- Removed Repository search tests
+- Kept `deleteStudent()` as a direct Repository data operation
+- Removed `sortById()` from the Repository contract
+- Kept sorting inside `SortingStrategy` implementations
+- Removed Repository console output
+- Removed an unused `Comparator` import
+- Expanded Repository test coverage
+- Verified the complete application with Maven
+
+Final Day 23 architecture:
+
+```text
+Main
+ ↓
+StudentService
+ ├── SearchStrategy
+ │    ├── LinearSearchStrategy
+ │    └── BinarySearchStrategy
+ │
+ ├── SortingStrategy
+ │    ├── BubbleSortStrategy
+ │    ├── SelectionSortStrategy
+ │    └── BuiltInSortStrategy
+ │
+ └── StudentRepository
+      └── InMemoryStudentRepository
+           └── ArrayList<Student>
+```
+
+Day 23 verification:
+
+```text
+Repository tests: 16/16
+Service tests:    20/20
+Total:            36/36
+
+Failures: 0
+Errors:   0
+Skipped:  0
+
+BUILD SUCCESS
 ```
 
 ## Project Evolution
@@ -302,34 +382,9 @@ File Persistence
         ↓
 JUnit Testing
         ↓
-Refactoring
-```
-
-## Day 22 — Main.java Refactoring
-
-Day 22 focused on improving the structure of `Main.java`.
-
-Completed:
-
-- Moved update-choice validation into `InputHelper`
-- Removed business-layer console printing
-- Extracted `viewStudents()`
-- Extracted `sortStudents()`
-- Extracted `searchStudent()`
-- Extracted `addStudent()`
-- Extracted `deleteStudent()`
-- Extracted `updateStudent()`
-
-The result is a cleaner menu with less duplicated code while preserving the existing architecture.
-
-The refactoring was verified with:
-
-```text
-35/35 tests passing
-0 failures
-0 errors
-0 skipped
-BUILD SUCCESS
+Main.java Refactoring
+        ↓
+Repository Cleanup
 ```
 
 ## Learning Outcomes
@@ -384,6 +439,8 @@ BUILD SUCCESS
 - `assertThrows`
 - Maven test lifecycle
 - Regression testing
+- Repository testing
+- Service testing
 
 ### File Handling
 
@@ -393,16 +450,17 @@ BUILD SUCCESS
 
 ## Future Improvements
 
-- Improve input validation
-- Refactor remaining repository responsibilities
-- Improve file persistence design
-- Add more comprehensive tests
-- Add integration tests
-- Database integration with MySQL
-- Layered architecture improvements
+- Collections deep dive and appropriate collection selection
+- Generics and `Comparable` / `Comparator` improvements
+- Java Streams
+- Stronger input and exception handling
+- File persistence improvements
+- More edge-case and integration tests
+- Multithreading fundamentals
 - Spring Boot REST API
-- Authentication and authorization
-- Web-based frontend
+- MySQL / JPA / Hibernate
+- DTOs and global exception handling
+- API testing
 
 ## Author
 
